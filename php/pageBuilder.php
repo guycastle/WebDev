@@ -21,3 +21,8 @@ function addFooter()
 {
     include ROOT_PATH . "views/partials/footer.php";
 }
+
+function addCarousel($array)
+{
+    include ROOT_PATH . "views/partials/carousel.php";
+}

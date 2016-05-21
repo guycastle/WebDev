@@ -1,0 +1,12 @@
+body {
+    background-color: #2B2B2B;
+}
+
+.coverphoto {
+    max-height: 70vh;
+}
+
+.coverphoto img {
+    object-fit: cover;
+    width: 100%;
+}

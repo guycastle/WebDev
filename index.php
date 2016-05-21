@@ -8,5 +8,6 @@
 include "php/pageBuilder.php";
 
 addHead("Welkom");
-addNavBar();
+addNavBar("index");
+addLineupCarousel();
 addFooter();

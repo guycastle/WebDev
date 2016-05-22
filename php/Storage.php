@@ -19,6 +19,26 @@ class Storage
 
     }
 
+    public function getShow($id)
+    {
+        if ($temp = $this->mysqli->query("SELECT * FROM shows WHERE id = $id")) {
+            return $temp->fetch_object();
+        }
+    }
+
+    public function getPictures($showId)
+    {
+        $returnValue = array();
+        if ($temp = $this->mysqli->query("SELECT * FROM pictures WHERE show_id = $showId ORDER BY cover_photo ASC")) {
+            if ($temp->num_rows > 0) {
+                while ($picture = $temp->fetch_object()) {
+                    array_push($returnValue, $picture);
+                }
+            }
+        }
+        return $returnValue;
+    }
+
     //Returns a multidimensional associative array with the day as key, an array of shows corresponding to that day
     //as value 
     public function getLineupSortedByDay()

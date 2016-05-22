@@ -14,9 +14,14 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li <?php if ($currentPage == "index") echo "class=\"active\"" ?>class="active"><a
-                                href="#">Home</a></li>
-                        <li class="dropdown">
+                        <li <?php if ($currentPage == "index") {
+                            echo "class=\"active\"";
+                        } ?>>
+                            <a href="/">Home</a></li>
+                        <li <?php if ($currentPage == "lineup") {
+                            echo "class=\"dropdown active\"";
+                        } else echo "class=\"dropdown\"";
+                        ?>>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Lineup <span class="caret"></span></a>
                             <ul class="dropdown-menu">

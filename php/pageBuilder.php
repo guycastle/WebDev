@@ -27,3 +27,13 @@ function addLineupCarousel()
 {
     include ROOT_PATH . "views/partials/lineupCarousel.php";
 }
+
+function addShowContent($show)
+{
+    include ROOT_PATH . "views/partials/showContent.php";
+}
+
+function addError($message)
+{
+    include ROOT_PATH . "views/partials/error.php";
+}

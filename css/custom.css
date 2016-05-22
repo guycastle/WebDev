@@ -10,3 +10,11 @@ body {
     object-fit: cover;
     width: 100%;
 }
+
+.description {
+    color: #BABABA;
+}
+
+.description h2 {
+    color: #dddddd;
+}

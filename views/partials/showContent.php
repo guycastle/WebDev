@@ -1,10 +1,15 @@
+<?php
+$storage = new Storage();
+$pictures = $storage->getPictures($show->id);
+if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
+    die();
+}
+?>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <?php
-        $storage = new Storage();
-        $lineup = $storage->getOrderedLineup();
         $c = 0;
-        foreach ($lineup as $show) {
+        foreach ($pictures as $picture) {
             if ($c == 0) {
                 echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
             } else {
@@ -16,16 +21,14 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <?php
-        foreach ($lineup as $show) {
+        foreach ($pictures as $picture) {
             $class = "item";
-            if ($lineup[0]->id == $show->id) {
+            if ($pictures[0]->id == $picture->id) {
                 $class = "item active";
             }
-            $picture = $storage->getCoverImageFor($show->id);
-            if (isset($picture)) {
-                echo "<div class=\"$class\">\n
+            echo "<div class=\"$class\">\n
                 <div class='coverphoto'>
-                    <a href='artists.php?id=$show->id'><img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\"></a>\n
+                    <img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\">\n
                     <div class=\"container\">\n
                         <div class=\"carousel-caption\">\n
                             <h1>$show->artist</h1>\n
@@ -33,7 +36,6 @@
                     </div>\n
                 </div>\n    
             </div>\n";
-            }
         }
         ?>
     </div>
@@ -46,3 +48,21 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div class="container description">
+    <div class="row">
+        <div class="col-lg-6">
+            <?php
+            echo "<h2>Over $show->artist</h2>\n
+                        <p>$show->description</p>";
+            ?>
+        </div>
+        <div class="col-lg-6">
+            <?php
+            echo "<h2>Beluister</h2>\n
+                        $show->spotify_embed_code";
+            ?>
+        </div>
+    </div>
+</div>
+</div>
+

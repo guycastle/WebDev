@@ -22,7 +22,7 @@
                 $class = "item active";
             }
             $picture = $storage->getCoverImageFor($show->id);
-            if (isset($picture)) {
+            if (isset($picture) && file_exists("img/$picture->id.$picture->extension")) {
                 echo "<div class=\"$class\">\n
                 <div class='coverphoto'>
                     <a href='artists.php?id=$show->id'><img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\"></a>\n

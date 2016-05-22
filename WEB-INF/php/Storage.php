@@ -97,7 +97,7 @@ class Storage
                 return $temp->fetch_object();
             } else {
                 //Fallback in case no pictures have been designated as cover picture, try to get any picture for give artist
-                $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? AND cover_photo = TRUE LIMIT 1");
+                $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? LIMIT 1");
                 $stmt->bind_param("d", $showId);
                 $stmt->execute();
                 if ($temp = $stmt->get_result()) {

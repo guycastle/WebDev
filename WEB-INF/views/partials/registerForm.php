@@ -17,48 +17,63 @@ if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["email"]) 
 
 ?>
 <div class="container">
-    <form class="form-horizontal register-form" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-        <div class="form-group">
+    <form class="form-horizontal" data-toggle="validator" id="register-form" method="post"
+          action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+        <div class="form-group has-feedback">
             <label for="inputName" class="col-offset-2 col-lg-2 control-label">Voornaam</label>
-            <div class="col-lg-8">
+            <div class="input-group col-lg-8">
                 <input type="text" class="form-control" name="name" id="inputName"
                        placeholder="Voornaam" <?php echo isset($_POST["name"]) ? "value=\"" . htmlspecialchars($_POST["name"]) . "\"" : "" ?>
-                       required>
+                       autofocus required data-error="Gelieve een naam in te vullen">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
             <label for="inputSurname" class="col-offset-2 col-lg-2 control-label">Familienaam</label>
-            <div class="col-lg-8">
+            <div class="input-group col-lg-8">
                 <input type="text" class="form-control" name="surname" id="inputSurname"
                        placeholder="Familienaam" <?php echo isset($_POST["surname"]) ? "value=\"" . htmlspecialchars($_POST["surname"]) . "\"" : "" ?>
-                       required>
+                       required data-error="Gelieve een familienaam in te vullen">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
             <label for="inputEmail" class="col-offset-2 col-lg-2 control-label">E-mail</label>
-            <div class="col-lg-8">
+            <div class="input-group col-lg-8">
                 <input type="email" class="form-control" name="email" id="inputEmail"
                        placeholder="E-mail" <?php echo isset($_POST["email"]) ? "value=\"" . htmlspecialchars($_POST["email"]) . "\"" : "" ?>
-                       required>
+                       required data-error="Gelieve een geldig e-mailadres in te vullen">
+                <span class="glyphicon form-control-feedback" data-toggle="popover" data-trigger="focus"
+                      aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
             <label for="inputPassword" class="col-offset-2 col-lg-2 control-label">Paswoord</label>
-            <div class="col-lg-8">
+            <div class="input-group col-lg-8">
                 <input type="password" class="form-control" name="password" id="inputPassword"
-                       placeholder="Paswoord" <?php comparePasswords() ?> required>
+                       placeholder="Paswoord" <?php comparePasswords() ?>
+                       required data-error="Gelieve een paswoord in te vullen">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback">
             <label for="inputPassword2" class="col-offset-2 col-lg-2 control-label">Paswoord</label>
-            <div class="col-lg-8">
-                <input type="password" class="form-control" name="repeat" id="inputPassword2"
-                       placeholder="Paswoord" <?php comparePasswords() ?> required>
+            <div class="input-group col-lg-8">
+                <input type="password" class="form-control" data-match="#inputPassword" name="repeat"
+                       id="inputPassword2"
+                       placeholder="Paswoord" <?php comparePasswords() ?>
+                       required data-error="Gelieve hier uw paswoord te herhalen">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-lightgrey">Registreer</button>
+                <button type="submit" class="btn btn-lightgrey" id="registerButton">Registreer</button>
             </div>
         </div>
     </form>

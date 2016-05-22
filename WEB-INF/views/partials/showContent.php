@@ -10,32 +10,36 @@ if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
         <?php
         $c = 0;
         foreach ($pictures as $picture) {
-            if ($c == 0) {
-                echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
-            } else {
-                echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\"></li>";
+            if (file_exists("img/$picture->id.$picture->extension")) {
+                if ($c == 0) {
+                    echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
+                } else {
+                    echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\"></li>";
+                }
+                $c++;
             }
-            $c++;
         }
         ?>
     </ol>
     <div class="carousel-inner" role="listbox">
         <?php
         foreach ($pictures as $picture) {
-            $class = "item";
-            if ($pictures[0]->id == $picture->id) {
-                $class = "item active";
-            }
-            echo "<div class=\"$class\">\n
+            if (file_exists("img/$picture->id.$picture->extension")) {
+                $class = "item";
+                if ($pictures[0]->id == $picture->id) {
+                    $class = "item active";
+                }
+                echo "<div class=\"$class\">\n
                 <div class='coverphoto'>
                     <img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\">\n
                     <div class=\"container\">\n
                         <div class=\"carousel-caption\">\n
-                            <h1>$show->artist</h1>\n
+                            <h1>$show->artist</h1>
                         </div>\n
                     </div>\n
-                </div>\n    
+                </div>\n
             </div>\n";
+            }
         }
         ?>
     </div>

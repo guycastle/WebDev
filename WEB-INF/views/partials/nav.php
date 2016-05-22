@@ -1,0 +1,77 @@
+<div class="page-header">
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar"
+                                aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Open navigatie menu</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">IndieGent Festival</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <?php if ($currentPage == "lineup") {
+                                echo "<li class=\"dropdown active\">\n";
+                            } else echo "<li class=\"dropdown\">\n";
+                            ?>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Lineup <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                $storage = new Storage();
+                                $lineup = $storage->getLineupSortedByDay();
+                                foreach ($lineup as $day => $shows) {
+                                    echo "<li class=\"dropdown-header\">$day</li>\n";
+                                    foreach ($shows as $show) {
+                                        echo "<li><a href=\"/artists.php?id=$show->id\">$show->artist</a></li>\n";
+                                    }
+                                    if (sizeof($lineup) > 1 && end(array_keys($lineup)) != $day) {
+                                        echo "<li role=\"separator\" class=\"divider\"></li>\n";
+                                    }
+                                    }
+                                ?>
+                            </ul>
+                            <li><a href="#contact">About</a></li>
+                            <?php
+                            if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"])) {
+                                $user = $storage->getUserByEmail($_SESSION["email"]);
+                                if ($user->admin == true) {
+                                    echo "<li><a href='/admin.php'>Admin</a></li>\n";
+                                    }
+                                }
+                            ?>
+                        </ul>
+                        <form class="navbar-form navbar-right" action="/login.php" method="post">
+                            <?php
+                            if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
+                                $name = $_SESSION["name"];
+                                echo "<div class=\"form-group\">\n\t
+                                    <div class='navbar-text'>Welkom, $name</div>\n
+                                    <input type='hidden' value='logout' name='logout'>
+                                    </div>\n
+                                    <button type=\"submit\" class=\"btn btn-grey btn-sm\">Uitloggen</button>\n";
+                            } else {
+                                echo "<div class=\"form-group\">\n\t
+                                        <input name=\"email\" type=\"email\" placeholder=\"Email\" class=\"form-control\" required>\n
+                                    </div>\n
+                                    <div class=\"form-group\">\n\t
+                                        <input name=\"password\" type=\"password\" placeholder=\"Password\" class=\"form-control\" required>\n
+                                    </div>\n
+                                    <button type=\"submit\" class=\"btn btn-grey\">Log in</button>\n
+                                    <a href='register.php' class='btn btn-grey'>Registreer</a>\n";
+                            }
+                            ?>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="content-container">

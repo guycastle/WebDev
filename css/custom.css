@@ -11,10 +11,51 @@ body {
     width: 100%;
 }
 
-.description {
+/*.description {
     color: #BABABA;
-}
+}*/
 
 .description h2 {
     color: #dddddd;
+}
+
+.errorText {
+    padding-top: 3em;
+    color: #dddddd;
+}
+
+.btn-grey {
+    color: #fff;
+    background-color: #535353;
+    border-color: #454545;
+}
+
+.btn-grey:hover {
+    color: #fff;
+    background-color: #3d3d3d;
+    border-color: #303030;
+}
+
+.greeting {
+    color: #9d9d9d;
+}
+
+.content-container {
+    color: #BABABA;
+}
+
+.register-form input {
+    width: 50%;
+}
+
+.btn-lightgrey {
+    color: #fff;
+    background-color: #8b8b8b;
+    border-color: #727272;
+}
+
+.btn-lightgrey:hover {
+    color: #fff;
+    background-color: #5e5e5e;
+    border-color: #454545;
 }

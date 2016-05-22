@@ -21,15 +21,23 @@ class Storage
 
     public function getShow($id)
     {
-        if ($temp = $this->mysqli->query("SELECT * FROM shows WHERE id = $id")) {
-            return $temp->fetch_object();
+        $stmt = $this->mysqli->prepare("SELECT * FROM shows WHERE id = ?");
+        $stmt->bind_param("d", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
         }
     }
 
     public function getPictures($showId)
     {
         $returnValue = array();
-        if ($temp = $this->mysqli->query("SELECT * FROM pictures WHERE show_id = $showId ORDER BY cover_photo ASC")) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? ORDER BY cover_photo ASC");
+        $stmt->bind_param("d", $showId);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
             if ($temp->num_rows > 0) {
                 while ($picture = $temp->fetch_object()) {
                     array_push($returnValue, $picture);
@@ -37,6 +45,18 @@ class Storage
             }
         }
         return $returnValue;
+    }
+
+    public function getUserByEmail($email)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
     }
 
     //Returns a multidimensional associative array with the day as key, an array of shows corresponding to that day
@@ -67,14 +87,20 @@ class Storage
         return $returnValue;
     }
 
-    public function getCoverImageFor($artistId)
+    public function getCoverImageFor($showId)
     {
-        if ($temp = $this->mysqli->query("SELECT * FROM pictures WHERE show_id = $artistId AND cover_photo = TRUE LIMIT 1")) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? AND cover_photo = TRUE LIMIT 1");
+        $stmt->bind_param("d", $showId);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
             if ($temp->num_rows > 0) {
                 return $temp->fetch_object();
             } else {
                 //Fallback in case no pictures have been designated as cover picture, try to get any picture for give artist
-                if ($temp = $this->mysqli->query("SELECT * FROM pictures WHERE show_id = $artistId LIMIT 1")) {
+                $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? AND cover_photo = TRUE LIMIT 1");
+                $stmt->bind_param("d", $showId);
+                $stmt->execute();
+                if ($temp = $stmt->get_result()) {
                     if ($temp->num_rows > 0) {
                         return $temp->fetch_object();
                     }

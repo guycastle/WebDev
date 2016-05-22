@@ -5,15 +5,24 @@
  * Date: 22/05/2016
  * Time: 01:49
  */
-include "php/pageBuilder.php";
+include "WEB-INF/php/pageBuilder.php";
 $storage = new Storage();
-$show = $storage->getShow($_GET["id"]);
-if (isset($show)) {
-    addHead($show->artist);
-    addNavBar("lineup");
-    addShowContent($show);
+
+if (isset($_GET["id"])) {
+    $show = $storage->getShow($_GET["id"]);
+    if (isset($show)) {
+        addHead($show->artist);
+        addNavBar("lineup");
+        addShowContent($show);
+        addFooter();
+    } else {
+        errorPage();
+    }
 } else {
-    addHead("Foutmelding");
-    addError("Deze pagina bestaat niet");
+    errorPage();
 }
-addFooter();
+
+function errorPage()
+{
+    buildErrorPage("Deze pagina bestaat niet");
+}

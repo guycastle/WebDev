@@ -5,7 +5,7 @@
  * Date: 20/05/2016
  * Time: 00:23
  */
-include "php/pageBuilder.php";
+include "WEB-INF/php/pageBuilder.php";
 
 addHead("Welkom");
 addNavBar("index");

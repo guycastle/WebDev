@@ -39,7 +39,7 @@ function addError($message)
     include ROOT_PATH . "WEB-INF/views/partials/error.php";
 }
 
-function addRegisterForm()
+function addRegisterForm($emailAlreadyInUse)
 {
     include ROOT_PATH . "WEB-INF/views/partials/registerForm.php";
 }

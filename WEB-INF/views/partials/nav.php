@@ -39,8 +39,8 @@
                             </ul>
                             <li><a href="#contact">About</a></li>
                             <?php
-                            if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"])) {
-                                $user = $storage->getUserByEmail($_SESSION["email"]);
+                            if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"]) && isset($_SESSION["userId"])) {
+                                $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);
                                 if ($user->admin == true) {
                                     if ($currentPage == "admin") {
                                         echo "<li class=\"dropdown active\">\n";

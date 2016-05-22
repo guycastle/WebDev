@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION["loggedIn"] = true;
                     $_SESSION["email"] = $email;
                     $_SESSION["name"] = $user->name;
+                    $_SESSION["userId"] = $user->id;
                     header("Location:/");
                 } else {
                     buildErrorPage("E-mail en paswoord komen niet overeen");

@@ -10,18 +10,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">IndieGent Festival</a>
+                    <a class="navbar-brand" href="/">IndieGent Festival</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li <?php if ($currentPage == "index") {
-                            echo "class=\"active\"";
-                        } ?>>
-                            <a href="/">Home</a></li>
-                        <li <?php if ($currentPage == "lineup") {
-                            echo "class=\"dropdown active\"";
-                        } else echo "class=\"dropdown\"";
-                        ?>>
+                        <?php if ($currentPage == "lineup") {
+                            echo "<li class=\"dropdown active\">\n";
+                        } else echo "<li class=\"dropdown\">\n";
+                        ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Lineup <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -39,7 +35,8 @@
                                 }
                                 ?>
                             </ul>
-                        </li>
+                    </
+                    >
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>

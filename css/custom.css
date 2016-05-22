@@ -72,6 +72,16 @@ body {
     border-bottom-right-radius: 4px;
 }
 
+.dropdown-menu {
+    background-color: #3b3b3b;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.dropdown-menu li a {
+    color: whitesmoke;
+}
+
 #login-form .navbar-text {
     margin-top: 7px;
     margin-bottom: 7px;

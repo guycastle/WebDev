@@ -42,9 +42,20 @@
                             if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"])) {
                                 $user = $storage->getUserByEmail($_SESSION["email"]);
                                 if ($user->admin == true) {
-                                    echo "<li><a href='/admin.php'>Admin</a></li>\n";
-                                    }
+                                    if ($currentPage == "admin") {
+                                        echo "<li class=\"dropdown active\">\n";
+                                    } else echo "<li class=\"dropdown\">\n";
+                                    ?>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="admin/news.php">Nieuwsitem aanmaken</a></li>
+                                        <li><a href="admin/lineup.php">Toevoegen aan lineup</a></li>
+                                        <li><a href="admin/edit.php">Show aanpassen</a></li>
+                                    </ul>
+                                    <?php
                                 }
+                            }
                             ?>
                         </ul>
                         <!-- Can't get chrome to stop autofilling password fields-->

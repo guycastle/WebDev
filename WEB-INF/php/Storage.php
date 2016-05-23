@@ -19,6 +19,8 @@ class Storage
 
     }
 
+    //When passing parameters to query, use prepared statements to prevent SQL injection
+
     public function getShow($id)
     {
         $stmt = $this->mysqli->prepare("SELECT * FROM shows WHERE id = ?");
@@ -145,5 +147,20 @@ class Storage
                 }
             }
         }
+    }
+
+    public function getNewsItems()
+    {
+        $returnValue = array();
+        $stmt = $this->mysqli->prepare("SELECT * FROM news_items ORDER BY time DESC");
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                while ($newsitem = $temp->fetch_object()) {
+                    array_push($returnValue, $newsitem);
+                }
+            }
+        }
+        return $returnValue;
     }
 }

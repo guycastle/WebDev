@@ -1,8 +1,5 @@
-DROP DATABASE IF EXISTS festival;
-
-CREATE DATABASE festival;
-
-USE festival;
+#DB CREATION EHB
+USE AWD026;
 
 CREATE TABLE users (
   id       BIGINT       NOT NULL AUTO_INCREMENT,
@@ -62,6 +59,3 @@ ALTER TABLE pictures ADD CONSTRAINT FK_pictures_1 FOREIGN KEY (show_id) REFERENC
 ALTER TABLE comments ADD CONSTRAINT FK_comments_1 FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE CASCADE;
 
 ALTER TABLE comments ADD CONSTRAINT FK_comments_2 FOREIGN KEY (news_item_id) REFERENCES news_items (id) ON UPDATE CASCADE;
-
-GRANT ALL ON festival.* TO 'owner'@'localhost'
-IDENTIFIED BY 'owner';

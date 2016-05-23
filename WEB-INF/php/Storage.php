@@ -88,6 +88,21 @@ class Storage
         }
     }
 
+    public function getAdminEmails()
+    {
+        $returnValue = array();
+        $stmt = $this->mysqli->prepare("SELECT email FROM users WHERE admin = TRUE");
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                while ($user = $temp->fetch_object()) {
+                    array_push($returnValue, $user->email);
+                }
+            }
+        }
+        return $returnValue;
+    }
+
     public function createUser($name, $surname, $email, $password)
     {
         $stmt = $this->mysqli->prepare("INSERT INTO users(name, surname, email, password) VALUES(?, ?, ?, ?)");

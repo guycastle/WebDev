@@ -51,3 +51,8 @@ function buildErrorPage($message)
     addError($message);
     addFooter();
 }
+
+function addContactForm($sessionEmail, $sessionName)
+{
+    include ROOT_PATH . "WEB-INF/views/partials/contactForm.php";
+}

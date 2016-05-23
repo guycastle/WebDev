@@ -57,6 +57,9 @@
                                 }
                             }
                             ?>
+                            <li><a href="/contact.php" <?php if ($currentPage == "contact") {
+                                    echo "class=\"active\"";
+                                } ?>>Contact</a></li>
                         </ul>
                         <!-- Can't get chrome to stop autofilling password fields-->
                         <form class="navbar-form navbar-right" id='login-form' action="/login.php" method="post"

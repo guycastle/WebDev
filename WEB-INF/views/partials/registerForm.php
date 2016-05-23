@@ -1,7 +1,7 @@
-<!-- remove special chars from PHP_SELF in order to avoid XSS-->
 <div class="container">
+    <!-- remove special chars from PHP_SELF in order to avoid XSS-->
     <form class="form-horizontal" data-toggle="validator" id="register-form" method="post"
-          action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <div class="form-group has-feedback">
             <label for="inputName" class="col-offset-2 col-lg-2 control-label">Voornaam</label>
             <div class="input-group col-lg-8">
@@ -29,8 +29,7 @@
                        placeholder="E-mail" <?php echo isset($_POST["email"]) ? "value=\"" . htmlspecialchars($_POST["email"]) . "\"" : "" ?>
                        required
                        data-error="<?php echo $emailAlreadyInUse ? "Er bestaat reeds een gebruiker met dit e-mailadres" : "Gelieve een geldig e-mailadres in te vullen" ?>">
-                <span class="glyphicon form-control-feedback" data-toggle="popover" data-trigger="focus"
-                      aria-hidden="true"></span>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div
                     class="help-block with-errors"><?php echo $emailAlreadyInUse ? "Er bestaat reeds een gebruiker met dit e-mailadres" : "" ?></div>
             </div>

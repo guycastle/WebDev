@@ -5,16 +5,16 @@ if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
     die();
 }
 ?>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="showCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <?php
         $c = 0;
         foreach ($pictures as $picture) {
             if (file_exists("img/$picture->id.$picture->extension")) {
                 if ($c == 0) {
-                    echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
+                    echo "<li data-target=\"#showCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
                 } else {
-                    echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\"></li>";
+                    echo "<li data-target=\"#showCarousel\" data-slide-to=\"$c\"></li>";
                 }
                 $c++;
             }
@@ -43,29 +43,34 @@ if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
         }
         ?>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <a class="left carousel-control" href="#showCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <a class="right carousel-control" href="#showCarousel" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
 </div>
+<?php
+$spotify = $show->spotify_embed_code;
+?>
 <div class="container description">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="<?php echo isset($spotify) ? "col-lg-8" : "col-lg-12" ?>">
             <?php
             echo "<h2>Over $show->artist</h2>\n
                         <p>$show->description</p>";
             ?>
         </div>
-        <div class="col-lg-6">
-            <?php
-            echo "<h2>Beluister</h2>\n
-                        $show->spotify_embed_code";
-            ?>
-        </div>
+        <?php
+        if (isset($spotify)) {
+            echo "<div class='col-lg-4'>\n\t
+                <h2>Beluister</h2>\n\t
+                $show->spotify_embed_code\n
+                </div>\n";
+        }
+        ?>
     </div>
 </div>
 </div>

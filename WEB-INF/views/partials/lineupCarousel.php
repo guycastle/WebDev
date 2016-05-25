@@ -1,4 +1,4 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="lineupCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <?php
         $storage = new Storage();
@@ -6,9 +6,9 @@
         $c = 0;
         foreach ($lineup as $show) {
             if ($c == 0) {
-                echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
+                echo "<li data-target=\"lineupCarousel\" data-slide-to=\"$c\" class=\"active\"></li>";
             } else {
-                echo "<li data-target=\"#myCarousel\" data-slide-to=\"$c\"></li>";
+                echo "<li data-target=\"#lineupCarousel\" data-slide-to=\"$c\"></li>";
             }
             $c++;
         }
@@ -37,11 +37,11 @@
         }
         ?>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <a class="left carousel-control" href="#lineupCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <a class="right carousel-control" href="#lineupCarousel" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>

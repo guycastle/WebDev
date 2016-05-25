@@ -7,7 +7,6 @@
      * Time: 17:11
      */
     $storage = new Storage();
-    setlocale(LC_ALL, 'nl_NL');
     $newsitems = $storage->getNewsItems();
     if (isset($newsitems) && !empty($newsitems)) {
         foreach ($newsitems as $newsitem) {

@@ -3,12 +3,15 @@ body {
 }
 
 .coverphoto {
-    max-height: 70vh;
-    min-height: 70vh;
+    max-height: 50vh;
+    min-height: 50vh;
 }
 
 .coverphoto img {
+    max-height: 50vh;
+    min-height: 50vh;
     object-fit: cover;
+    object-position: 50% 30%;
     width: 100%;
 }
 

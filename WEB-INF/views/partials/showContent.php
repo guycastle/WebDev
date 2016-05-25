@@ -59,6 +59,11 @@ $spotify = $show->spotify_embed_code;
     <div class="row">
         <div class="<?php echo isset($spotify) ? "col-lg-8" : "col-lg-12" ?>">
             <?php
+            //Convert the DB timestamp (which is a string apparently) to a time, in order to format that to a particular
+            //string and the uppercase that first letter. Not using the day property of the show object, using the actual
+            //day to prevent confusion. The day property is of import for ticketing purposes, not actual timetelling
+            $fmtTime = ucfirst(strftime("%A, %d %B om %Hu%M", strtotime($show->time)));
+            echo "<h1>$fmtTime</h1>";
             echo "<h2>Over $show->artist</h2>\n
                         <p>$show->description</p>";
             ?>

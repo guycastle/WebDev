@@ -66,6 +66,8 @@ $spotify = $show->spotify_embed_code;
             echo "<h1>$fmtTime</h1>";
             echo "<h2>Over $show->artist</h2>\n
                         <p>$show->description</p>";
+            $socMed = new SocMediaLinkBuilder();
+            echo $socMed->getSocialMediaLinks();
             ?>
         </div>
         <?php

@@ -100,3 +100,13 @@ body {
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
+
+.soc-med {
+    display: inline-flex;
+    list-style: none;
+}
+
+.soc-med img {
+    max-height: 2em;
+    max-width: 2em;
+}

@@ -8,6 +8,7 @@
 define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
 setlocale(LC_ALL, 'nl_BE');
 include_once "Storage.php";
+include_once "SocMediaLinkBuilder.php";
 session_start();
 
 function addHead($title)

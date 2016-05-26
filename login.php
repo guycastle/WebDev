@@ -7,7 +7,7 @@
  */
 //Check if correct method is used
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include "WEB-INF/php/pageBuilder.php";
+    include "php/pageBuilder.php";
     if (isset($_POST["logout"]) && $_POST["logout"] == "logout") {
         session_unset();
         session_destroy();

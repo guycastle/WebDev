@@ -8,42 +8,42 @@
 define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
 setlocale(LC_ALL, 'nl_BE');
 include_once "Storage.php";
-include_once "SocMediaLinkBuilder.php";
+include_once "Mobile_Detect.php";
 session_start();
 
 function addHead($title)
 {
-    include ROOT_PATH . "WEB-INF/views/partials/head.php";
+    include ROOT_PATH . "views/partials/head.php";
 }
 
 function addNavBar($currentPage)
 {
-    include ROOT_PATH . "WEB-INF/views/partials/nav.php";
+    include ROOT_PATH . "views/partials/nav.php";
 }
 
 function addFooter()
 {
-    include ROOT_PATH . "WEB-INF/views/partials/footer.php";
+    include ROOT_PATH . "views/partials/footer.php";
 }
 
 function addLineupCarousel()
 {
-    include ROOT_PATH . "WEB-INF/views/partials/lineupCarousel.php";
+    include ROOT_PATH . "views/partials/lineupCarousel.php";
 }
 
 function addShowContent($show)
 {
-    include ROOT_PATH . "WEB-INF/views/partials/showContent.php";
+    include ROOT_PATH . "views/partials/showContent.php";
 }
 
 function addError($message)
 {
-    include ROOT_PATH . "WEB-INF/views/partials/error.php";
+    include ROOT_PATH . "views/partials/error.php";
 }
 
 function addRegisterForm($emailAlreadyInUse)
 {
-    include ROOT_PATH . "WEB-INF/views/partials/registerForm.php";
+    include ROOT_PATH . "views/partials/registerForm.php";
 }
 
 function buildErrorPage($message)
@@ -56,5 +56,5 @@ function buildErrorPage($message)
 
 function addContactForm($sessionEmail, $sessionName)
 {
-    include ROOT_PATH . "WEB-INF/views/partials/contactForm.php";
+    include ROOT_PATH . "views/partials/contactForm.php";
 }

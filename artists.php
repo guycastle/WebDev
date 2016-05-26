@@ -5,7 +5,7 @@
  * Date: 22/05/2016
  * Time: 01:49
  */
-include "WEB-INF/php/pageBuilder.php";
+include "php/pageBuilder.php";
 $storage = new Storage();
 
 if (isset($_GET["id"])) {

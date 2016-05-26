@@ -6,8 +6,8 @@
  * Time: 01:25
  */
 //Tutorial: https://www.formget.com/send-email-via-gmail-smtp-server-in-php/
-include "WEB-INF/php/pageBuilder.php";
-include "WEB-INF/php/PHPMailerAutoload.php";
+include "php/pageBuilder.php";
+include "php/PHPMailerAutoload.php";
 
 define("PATTERN", "^[\\w\\d]+([\\s][\\w\\d.'-]+)*$");
 define("SMTP_SERVER", "smtp.gmail.com");

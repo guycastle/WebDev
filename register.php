@@ -5,7 +5,7 @@
  * Date: 22/05/2016
  * Time: 08:04
  */
-include "WEB-INF/php/pageBuilder.php";
+include "php/pageBuilder.php";
 //REGEX -> moet beginnen en eindigen met een letter of cijfer, enkel enkelvoudige spaties tussen woorden toegelaten
 define("PATTERN", "^[\\w\\d]+([\\s][\\w\\d.'-]+)*$");
 $storage = new Storage();

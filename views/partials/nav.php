@@ -34,7 +34,7 @@
                                     if (sizeof($lineup) > 1 && end(array_keys($lineup)) != $day) {
                                         echo "<li role=\"separator\" class=\"divider\"></li>\n";
                                     }
-                                    }
+                                }
                                 ?>
                             </ul>
                             <li><a href="#contact">About</a></li>

@@ -1,5 +1,6 @@
 <?php
 $storage = new Storage();
+$mobDetect = new Mobile_Detect();
 $pictures = $storage->getPictures($show->id);
 if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
     die();
@@ -66,8 +67,9 @@ $spotify = $show->spotify_embed_code;
             echo "<h1>$fmtTime</h1>";
             echo "<h2>Over $show->artist</h2>\n
                         <p>$show->description</p>";
-            $socMed = new SocMediaLinkBuilder();
-            echo $socMed->getSocialMediaLinks();
+            if (!$mobDetect->isMobile()) {
+                echo "<div class=\"addthis_sharing_toolbox\"></div>";
+            }
             ?>
         </div>
         <?php

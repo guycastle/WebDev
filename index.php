@@ -10,4 +10,5 @@ include "php/pageBuilder.php";
 addHead("Welkom");
 addNavBar("index");
 addLineupCarousel();
+addNews();
 addFooter();

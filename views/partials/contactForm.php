@@ -37,7 +37,7 @@
         <div class="form-group has-feedback">
             <label for="inputMessage" class="col-offset-2 col-lg-2 control-label">Boodschap</label>
             <div class="input-group col-lg-8">
-                <textarea class="form-control" rows="5" pattern="<?php echo PATTERN ?>"
+                <textarea class="form-control" rows="5"
                           placeholder="Uw boodschap hier" id="inputMessage" name="message"
                           required data-error="Gelieve een boodschap mee te geven"></textarea>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>

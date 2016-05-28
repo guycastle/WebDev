@@ -58,3 +58,8 @@ function addContactForm($sessionEmail, $sessionName)
 {
     include ROOT_PATH . "views/partials/contactForm.php";
 }
+
+function addNews()
+{
+    include ROOT_PATH . "views/partials/news.php";
+}

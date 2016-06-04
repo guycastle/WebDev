@@ -94,4 +94,8 @@ class PageBuilder
     {
         include ROOT_PATH . "views/partials/admin/showForm.php";
     }
+    
+    function addAboutContent() {
+        include ROOT_PATH . "views/partials/aboutContent.php";
+    }
 }

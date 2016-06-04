@@ -10,6 +10,10 @@
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/fileinput.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
     <!-- Custom tweaks -->
     <link href="/css/custom.css" rel="stylesheet">
 

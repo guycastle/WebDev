@@ -21,7 +21,7 @@
             if ($lineup[0]->id == $show->id) {
                 $class = "item active";
             }
-            $picture = $storage->getCoverImageFor($show->id);
+            $picture = $storage->getSingleImageFor($show->id);
             if (isset($picture) && file_exists("img/$picture->id.$picture->extension")) {
                 echo "<div class=\"$class\">\n
                 <div class='coverphoto'>

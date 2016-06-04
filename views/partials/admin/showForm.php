@@ -1,65 +1,83 @@
+<?php
+$pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%3A.*" width="300" height="380" frameborder="0" allowtransparency="true"><\/iframe>$';
+?>
+<br>
 <div class="container">
     <!-- remove special chars from PHP_SELF in order to avoid XSS-->
-    <form class="form-horizontal" data-toggle="validator" id="register-form" method="post"
+    <form class="form-horizontal" data-toggle="validator" id="show-form" method="post"
           action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <div class="form-group has-feedback">
-            <label for="inputName" class="col-offset-2 col-lg-2 control-label">Voornaam</label>
+            <label for="inputArtist" class="col-offset-2 col-lg-2 control-label">Artist</label>
             <div class="input-group col-lg-8">
-                <input type="text" class="form-control" name="name" id="inputName" pattern="<?php echo PATTERN ?>"
-                       placeholder="Voornaam" <?php echo isset($_POST["name"]) ? "value=\"" . htmlspecialchars($_POST["name"]) . "\"" : "" ?>
-    autofocus required data-error="Gelieve een naam in te vullen">
-    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-    <div class="help-block with-errors"></div>
-    </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label for="inputSurname" class="col-offset-2 col-lg-2 control-label">Familienaam</label>
-        <div class="input-group col-lg-8">
-            <input type="text" class="form-control" name="surname" id="inputSurname" pattern="<?php echo PATTERN ?>"
-                   placeholder="Familienaam" <?php echo isset($_POST["surname"]) ? "value=\"" . htmlspecialchars($_POST["surname"]) . "\"" : "" ?>
-                   required data-error="Gelieve een familienaam in te vullen">
-            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <div class="help-block with-errors"></div>
+                <input type="text" class="form-control" name="artist" id="inputArtist"
+                       placeholder="Artist" <?php echo isset($_POST["artist"]) ? "value=\"" . htmlspecialchars($_POST["artist"]) . "\"" : "" ?>
+                       autofocus required data-error="Gelieve een artiestennaam in te vullen">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback<?php echo $emailAlreadyInUse ? " has-error has-danger" : "" ?>">
-        <label for="inputEmail" class="col-offset-2 col-lg-2 control-label">E-mail</label>
-        <div class="input-group col-lg-8">
-            <input type="email" class="form-control" name="email" id="inputEmail"
-                   placeholder="E-mail" <?php echo isset($_POST["email"]) ? "value=\"" . htmlspecialchars($_POST["email"]) . "\"" : "" ?>
-                   required
-                   data-error="<?php echo $emailAlreadyInUse ? "Er bestaat reeds een gebruiker met dit e-mailadres" : "Gelieve een geldig e-mailadres in te vullen" ?>">
-            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <div
-                class="help-block with-errors"><?php echo $emailAlreadyInUse ? "Er bestaat reeds een gebruiker met dit e-mailadres" : "" ?></div>
+        <div class="form-group has-feedback">
+            <label for="inputDescription" class="col-offset-2 col-lg-2 control-label">Beschrijving</label>
+            <div class="input-group col-lg-8">
+                <textarea class="form-control" name="description" id="inputDescription"
+                          placeholder="Artiestenbeschrijving hier" <?php echo isset($_POST["description"]) ? "value=\"" . htmlspecialchars($_POST["description"]) . "\"" : "" ?>
+                          required data-error="Gelieve een artiestenbeschrijving in te vullen"></textarea>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label for="inputPassword" class="col-offset-2 col-lg-2 control-label">Paswoord</label>
-        <div class="input-group col-lg-8">
-            <input type="password" class="form-control" name="password" id="inputPassword"
-                   pattern="<?php echo PATTERN ?>"
-                   placeholder="Paswoord" <?php comparePasswords() ?> minlength="8"
-                   required data-error="Gelieve een paswoord in te vullen van minstens 8 tekens in te vullen">
-            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <div class="help-block with-errors"></div>
+        <div class="form-group has-feedback">
+            <label for="inputTime" class="col-offset-2 col-lg-2 control-label">Tijd</label>
+            <div class="input-group col-lg-8">
+                <input type="datetime-local" class="form-control" required
+                       data-error="Gelieve een tijdstip in te vullen" name="time" id="inputTime">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label for="inputPassword2" class="col-offset-2 col-lg-2 control-label">Paswoord</label>
-        <div class="input-group col-lg-8">
-            <input type="password" class="form-control" data-match="#inputPassword" name="repeat"
-                   id="inputPassword2" pattern="<?php echo PATTERN ?>"
-                   placeholder="Paswoord" <?php comparePasswords() ?> minlength="8"
-                   required data-error="Gelieve hier uw paswoord te herhalen">
-            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-            <div class="help-block with-errors"></div>
+        <div class="form-group has-feedback">
+            <label for="inputDay" class="col-offset-2 col-lg-2 control-label">Dag</label>
+            <div class="input-group col-lg-8">
+                <select required data-error="Gelieve een dag te kiezen" name="day" id="inputDay" class="form-control">
+                    <option value="" disabled selected>Kies een dag</option>
+                    <option value="Maandag">Maandag</option>
+                    <option value="Dinsdag">Dinsdag</option>
+                    <option value="Woensdag">Woensdag</option>
+                    <option value="Donderdag">Donderdag</option>
+                    <option value="Vrijdag">Vrijdag</option>
+                    <option value="Zaterdag">Zaterdag</option>
+                    <option value="Zondag">Zondag</option>
+                </select>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-lightgrey" id="registerButton">Registreer</button>
+        <div class="form-group has-feedback">
+            <label for="inputSpotify" class="col-offset-2 col-lg-2 control-label">Spotify Embed Code</label>
+            <div class="input-group col-lg-8">
+                <input type="text" class="form-control" name="spotify" id="inputSpotify" placeholder="Artist"
+                       pattern='<?php echo $pattern ?>' <?php echo isset($_POST["spotify"]) ? "value=\"" . htmlspecialchars($_POST["spotify"]) . "\"" : "" ?>
+                       autofocus data-error="Gelieve een geldige spotify embed code in te vullen">
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors">Ga op spotify, klik op "..." naast de gewenste artist en kies "Copy
+                    embed code"
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="form-group has-feedback">
+            <label for="inputImages" class="col-offset-2 col-lg-2 control-label">Afbeeldingen</label>
+            <div class="input-group col-lg-8">
+                <input id="inputImages" type="file" class="file form-control" multiple data-show-upload="false"
+                       data-error="Gelieve minstens 1 afbeelding te voorzien" required>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-lightgrey" id="registerButton">Registreer</button>
+            </div>
+        </div>
     </form>
 </div>
+<!-- the main fileinput plugin file -->
+<script src="/js/fileinput.min.js"></script>

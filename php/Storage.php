@@ -36,7 +36,7 @@ class Storage
     public function getPictures($showId)
     {
         $returnValue = array();
-        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? ORDER BY cover_photo ASC");
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ?");
         $stmt->bind_param("d", $showId);
         $stmt->execute();
         if ($temp = $stmt->get_result()) {
@@ -127,24 +127,14 @@ class Storage
         }
     }
 
-    public function getCoverImageFor($showId)
+    public function getSingleImageFor($showId)
     {
-        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? AND cover_photo = TRUE LIMIT 1");
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? LIMIT 1");
         $stmt->bind_param("d", $showId);
         $stmt->execute();
         if ($temp = $stmt->get_result()) {
             if ($temp->num_rows > 0) {
                 return $temp->fetch_object();
-            } else {
-                //Fallback in case no pictures have been designated as cover picture, try to get any picture for give artist
-                $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? LIMIT 1");
-                $stmt->bind_param("d", $showId);
-                $stmt->execute();
-                if ($temp = $stmt->get_result()) {
-                    if ($temp->num_rows > 0) {
-                        return $temp->fetch_object();
-                    }
-                }
             }
         }
     }

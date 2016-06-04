@@ -19,6 +19,7 @@ else {
         }
         $pBuilder->addHead("Admin");
         $pBuilder->addNavBar("admin");
+        $pBuilder->addShowForm();
         $pBuilder->addFooter();
     }
     else {

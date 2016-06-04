@@ -223,4 +223,43 @@ class Storage
             }
         }
     }
+    
+    public function createShow($artist, $description, $time, $day, $spotify) {
+        $stmt = $this->mysqli->prepare("INSERT INTO shows(artist, description, time, day, spotify_uri) VALUES(?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $artist, $description, $time, $day, $spotify);
+        if ($stmt->execute()) {
+            return $this->getShow($this->mysqli->insert_id);
+        }
+    }
+    
+    public function createPicture($showId, $extension) {
+        $stmt = $this->mysqli->prepare("INSERT INTO pictures(show_id, extension) VALUES(?, ?)");
+        $stmt->bind_param("ss", $showId, $extension);
+        if ($stmt->execute()) {
+            return $this->getPicture($this->mysqli->insert_id);
+        }
+    }
+    
+    public function getPicture($pictureID) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE id = ?");
+        $stmt->bind_param("d", $pictureID);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+
+    public function deleteShow($showId) {
+        $stmt = $this->mysqli->prepare("DELETE FROM shows WHERE id = ?");
+        $stmt->bind_param("d", $pictureID);
+        $stmt->execute();
+        if ($stmt->affected_rows == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

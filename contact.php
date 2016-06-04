@@ -35,7 +35,7 @@ if (isset($_POST["name"]) &&
     $name = htmlspecialchars($_POST["name"]);
     $email = htmlspecialchars($_POST["email"]);
     $subject = htmlspecialchars($_POST["subject"]);
-    $message = htmlspecialchars($_POST["message"]);
+    $message = nl2br(htmlspecialchars($_POST["message"]));
 
     $storage = new Storage();
     $emails = $storage->getAdminEmails();

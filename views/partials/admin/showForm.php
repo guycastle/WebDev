@@ -5,7 +5,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
 <div class="container">
     <!-- remove special chars from PHP_SELF in order to avoid XSS-->
     <form class="form-horizontal" data-toggle="validator" id="show-form" method="post"
-          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
         <div class="form-group has-feedback">
             <label for="inputArtist" class="col-offset-2 col-lg-2 control-label">Artist</label>
             <div class="input-group col-lg-8">
@@ -19,7 +19,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
         <div class="form-group has-feedback">
             <label for="inputDescription" class="col-offset-2 col-lg-2 control-label">Beschrijving</label>
             <div class="input-group col-lg-8">
-                <textarea class="form-control" name="description" id="inputDescription"
+                <textarea class="form-control" name="description" id="inputDescription" rows="8"
                           placeholder="Artiestenbeschrijving hier" <?php echo isset($_POST["description"]) ? "value=\"" . htmlspecialchars($_POST["description"]) . "\"" : "" ?>
                           required data-error="Gelieve een artiestenbeschrijving in te vullen"></textarea>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -56,18 +56,18 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
             <label for="inputSpotify" class="col-offset-2 col-lg-2 control-label">Spotify Embed Code</label>
             <div class="input-group col-lg-8">
                 <input type="text" class="form-control" name="spotify" id="inputSpotify" placeholder="Spotify Embed Code"
-                       pattern='<?php echo $pattern ?>' <?php echo isset($_POST["spotify"]) ? "value=\"" . htmlspecialchars($_POST["spotify"]) . "\"" : "" ?>
-                       autofocus data-error="Gelieve een geldige spotify embed code in te vullen">
+                       pattern='<?php echo SPOTIFY_PATTERN ?>' <?php echo isset($_POST["spotify"]) ? "value=\"" . htmlspecialchars($_POST["spotify"]) . "\"" : "" ?>
+                       autofocus data-error="Gelieve een geldige Spotify URI in te vullen">
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                <div class="help-block with-errors">Ga op spotify, klik op "..." naast de gewenste artist en kies "Copy
-                    embed code"
+                <div class="help-block with-errors">Ga op Spotify, klik op "..." naast de gewenste artiest en kies "Copy
+                    Spotify URI"
                 </div>
             </div>
         </div>
         <div class="form-group has-feedback">
             <label for="inputImages" class="col-offset-2 col-lg-2 control-label">Afbeeldingen</label>
             <div class="input-group col-lg-8">
-                <input id="inputImages" type="file" class="file form-control" multiple data-show-upload="false"
+                <input id="inputImages" name="images[]" type="file" class="file form-control" multiple data-show-upload="false"
                        data-error="Gelieve minstens 1 afbeelding te voorzien" required>
                 <div class="help-block with-errors"></div>
             </div>

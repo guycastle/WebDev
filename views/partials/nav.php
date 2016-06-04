@@ -52,9 +52,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="admin/news.php">Nieuwsitem aanmaken</a></li>
-                                        <li><a href="admin/lineup.php">Toevoegen aan lineup</a></li>
-                                        <li><a href="admin/edit.php">Show aanpassen</a></li>
+                                        <li><a href="/admin/news.php">Nieuwsitem aanmaken</a></li>
+                                        <li><a href="/admin/lineup.php">Toevoegen aan lineup</a></li>
                                     </ul>
                                     <?php
                                 }

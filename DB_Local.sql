@@ -22,7 +22,7 @@ CREATE TABLE shows (
   description        TEXT NOT NULL,
   time               TIMESTAMP     NOT NULL,
   day                VARCHAR(16)   NOT NULL,
-  spotify_embed_code VARCHAR(255),
+  spotify_uri VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 

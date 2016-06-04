@@ -16,7 +16,7 @@ else {
     if (isset($user) && $user->admin) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["title"]) && isset($_POST["content"]) && !empty($_POST["title"] && !empty($_POST["content"]))) {
             $newsTitle = htmlspecialchars($_POST["title"]);
-            $newsContent = htmlspecialchars($_POST["content"]);
+            $newsContent = nl2br(htmlspecialchars($_POST["content"]));
             $newsItem = $storage->createNewsItem($newsTitle, $newsContent);
             if (isset($newsItem) && !empty($newsItem)) {
                 header("Location:/comments.php?id=" . $newsItem->id);

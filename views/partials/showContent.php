@@ -54,7 +54,7 @@ if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
     </a>
 </div>
 <?php
-$spotify = $show->spotify_embed_code;
+$spotify = $show->spotify_uri;
 ?>
 <div class="container description">
     <div class="row">
@@ -75,9 +75,10 @@ $spotify = $show->spotify_embed_code;
         </div>
         <?php
         if (isset($spotify)) {
+            $encodedURI = urlencode($spotify);
             echo "<div class='col-lg-4'>\n\t
                 <h2>Beluister</h2>\n\t
-                $show->spotify_embed_code\n
+                <iframe src=\"https://embed.spotify.com/?uri=$encodedURI\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>\n
                 </div>\n";
         }
         ?>

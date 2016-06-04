@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ) {
         $user = $storage->getUserById($_SESSION["userId"]);
         if (isset($user)) {
-            $commentContent = htmlspecialchars($_POST["content"]);
+            $commentContent = nl2br(htmlspecialchars($_POST["content"]));
             $newsItemId = htmlspecialchars($_POST["newsItemId"]);
             if (isset($commentContent) && !empty($commentContent) && isset($newsItemId) && !empty($newsItemId)) {
                 $temp = $storage->getNewsItem($newsItemId);

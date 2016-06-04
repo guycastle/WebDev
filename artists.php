@@ -17,8 +17,8 @@ if (isset($_GET["id"])) {
         $pBuilder->addShowContent($show);
         $pBuilder->addFooter();
     } else {
-        $pBuilder->errorPage("Deze pagina bestaat niet");
+        $pBuilder->buildErrorPage("Deze pagina bestaat niet");
     }
 } else {
-    $pBuilder->errorPage("Deze pagina bestaat niet");
+    $pBuilder->buildErrorPage("Deze pagina bestaat niet");
 }

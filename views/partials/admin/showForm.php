@@ -68,7 +68,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
             <label for="inputImages" class="col-offset-2 col-lg-2 control-label">Afbeeldingen</label>
             <div class="input-group col-lg-8">
                 <input id="inputImages" name="images[]" type="file" class="file form-control" multiple data-show-upload="false"
-                       data-error="Gelieve minstens 1 afbeelding te voorzien" required>
+                       data-error="Gelieve minstens 1 afbeelding te voorzien" required accept="image/*">
                 <div class="help-block with-errors"></div>
             </div>
         </div>

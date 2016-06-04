@@ -33,7 +33,9 @@ else {
                 $tempFilePaths = $files["tmp_name"];
                 $fileType = $files["type"];
                 for ($i = 0; $i < sizeof($originalFileNames); $i++) {
-                    if (preg_match('/^image\/.*$/', $fileType[$i])) {
+                    //Try to more or less validate that the file is an image. If it isn't getimagesize will return 0 as size
+                    //Not foolproof, but it'll have to do
+                    if (preg_match('/^image\/.*$/', $fileType[$i]) && getimagesize($tempFilePaths[$i]) != 0) {
                         $extension = pathinfo($originalFileNames[$i], PATHINFO_EXTENSION);
                         $newPicture = $storage->createPicture($newShow->id, $extension);
                         if (isset($newPicture)) {

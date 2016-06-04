@@ -5,7 +5,8 @@
  * Date: 22/05/2016
  * Time: 08:04
  */
-include "php/pageBuilder.php";
+include "php/PageBuilder.php";
+$pBuilder = new PageBuilder();
 //REGEX -> moet beginnen en eindigen met een letter of cijfer, enkel enkelvoudige spaties tussen woorden toegelaten
 define("PATTERN", "^[\\w\\d]+([\\s][\\w\\d.'-]+)*$");
 $storage = new Storage();
@@ -38,8 +39,8 @@ if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["email"]) 
         }
     }
 }
-addHead("Registreer");
-addNavBar(null);
-addRegisterForm($emailAlreadyInUse);
-addFooter();
+$pBuilder->addHead("Registreer");
+$pBuilder->addNavBar(null);
+$pBuilder->addRegisterForm($emailAlreadyInUse);
+$pBuilder->addFooter();
 ?>

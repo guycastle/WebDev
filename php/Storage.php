@@ -163,4 +163,39 @@ class Storage
         }
         return $returnValue;
     }
+    
+    public function getNewsItem($id) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM news_items WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+
+    public function createNewsItem($title, $content) {
+        $stmt = $this->mysqli->prepare("INSERT INTO news_items(title, content, time) VALUES(?, ?, NOW())");
+        $stmt->bind_param("ss", $title, $content);
+        if ($stmt->execute()) {
+            //return the newly created user object
+            return $this->getNewsItem($this->mysqli->insert_id);
+        }
+    }
+    
+    public function getCommentsForNewsItem($newsItemId) {
+        $returnValue = array();
+        $stmt = $this->mysqli->prepare("SELECT * FROM comments WHERE news_item_id = ? ORDER BY time ASC");
+        $stmt->bind_param("d", $newsItemId);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                while ($comment = $temp->fetch_object()) {
+                    array_push($returnValue, $comment);
+                }
+            }
+        }
+        return $returnValue;
+    }
 }

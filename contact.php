@@ -6,9 +6,9 @@
  * Time: 01:25
  */
 //Tutorial: https://www.formget.com/send-email-via-gmail-smtp-server-in-php/
-include "php/pageBuilder.php";
+include "php/PageBuilder.php";
 include "php/PHPMailerAutoload.php";
-
+$pBuilder = new PageBuilder();
 define("PATTERN", "^[\\w\\d]+([\\s][\\w\\d.'-]+)*$");
 define("SMTP_SERVER", "smtp.gmail.com");
 define("SMTP_PORT", 587);
@@ -64,12 +64,12 @@ if (isset($_POST["name"]) &&
 
     }
 }
-addHead("Contact");
-addNavBar("contact");
+$pBuilder->addHead("Contact");
+$pBuilder->addNavBar("contact");
 if ($success) {
-    addError("Uw boodschap werd verzonden");
+    $pBuilder->addError("Uw boodschap werd verzonden");
 } else {
     echo "<h1>$mailer->ErrorInfo</h1>";
-    addContactForm($sessionEmail, $sessionName);
+    $pBuilder->addContactForm($sessionEmail, $sessionName);
 }
-addFooter();
+$pBuilder->addFooter();

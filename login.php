@@ -7,7 +7,8 @@
  */
 //Check if correct method is used
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include "php/pageBuilder.php";
+    include "php/PageBuilder.php";
+    $pBuilder = new PageBuilder();
     if (isset($_POST["logout"]) && $_POST["logout"] == "logout") {
         session_unset();
         session_destroy();
@@ -15,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $storage = new Storage();
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
-            buildErrorPage("U bent al ingelogd");
+            $pBuilder->buildErrorPage("U bent al ingelogd");
         }
         $email = $_POST["email"];
         $password = $_POST["password"];
         if (!isset($email) || empty($email) || !isset($password) || empty($password)) {
-            buildErrorPage("E-mail en/of paswoord niet ingevuld");
+            $pBuilder->buildErrorPage("E-mail en/of paswoord niet ingevuld");
         } else {
             $user = $storage->getUserByEmail($email);
             if (isset($user)) {
@@ -32,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION["surname"] = $user->surname;
                     header("Location:/");
                 } else {
-                    buildErrorPage("E-mail en paswoord komen niet overeen");
+                    $pBuilder->buildErrorPage("E-mail en paswoord komen niet overeen");
                 }
             } else {
-                buildErrorPage("E-mail en paswoord komen niet overeen");
+                $pBuilder->buildErrorPage("E-mail en paswoord komen niet overeen");
             }
         }
     }

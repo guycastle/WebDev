@@ -25,7 +25,6 @@ CREATE TABLE shows (
 CREATE TABLE pictures (
   id          BIGINT                   NOT NULL AUTO_INCREMENT,
   show_id     BIGINT                   NOT NULL,
-  cover_photo BOOL                              DEFAULT FALSE,
   extension   VARCHAR(4) DEFAULT 'jpg' NOT NULL,
   PRIMARY KEY (id)
 );

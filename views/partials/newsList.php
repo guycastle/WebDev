@@ -25,7 +25,7 @@
                 </div>\n
                 </div>\n";
             if ($newsitem != end($newsitems)) {
-                echo "<hr>";
+                echo "<br>";
             }
         }
     }

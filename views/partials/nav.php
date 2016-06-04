@@ -37,7 +37,9 @@
                                 }
                                 ?>
                             </ul>
-                            <li><a href="/about.php">About</a></li>
+                            <li><a href="/about.php"<?php if ($currentPage == "about") {
+                                    echo "class=\"active\"";
+                                } ?>>About</a></li>
                             <li><a href="/contact.php" <?php if ($currentPage == "contact") {
                                     echo "class=\"active\"";
                                 } ?>>Contact</a></li>

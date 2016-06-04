@@ -44,6 +44,18 @@ body {
     color: #BABABA;
 }
 
+.dropdown-menu .dropdown-header:hover {
+    background-color: #3B3B3B;
+}
+
+.navbar .active {
+    background-color: #232323;
+}
+
+.navbar li:hover {
+    background-color: #080808;
+}
+
 #register-form, #contact-form {
     padding-top: 1em;
 }

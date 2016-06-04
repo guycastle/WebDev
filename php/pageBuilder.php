@@ -6,60 +6,92 @@
  * Time: 00:23
  */
 define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
-setlocale(LC_ALL, 'nl_BE');
+setlocale(LC_ALL, 'Belgian');
 include_once "Storage.php";
 include_once "Mobile_Detect.php";
 session_start();
 
-function addHead($title)
+class PageBuilder
 {
-    include ROOT_PATH . "views/partials/head.php";
-}
 
-function addNavBar($currentPage)
-{
-    include ROOT_PATH . "views/partials/nav.php";
-}
+    function addLineupCarousel()
+    {
+        include ROOT_PATH . "views/partials/lineupCarousel.php";
+    }
 
-function addFooter()
-{
-    include ROOT_PATH . "views/partials/footer.php";
-}
+    function addShowContent($show)
+    {
+        include ROOT_PATH . "views/partials/showContent.php";
+    }
 
-function addLineupCarousel()
-{
-    include ROOT_PATH . "views/partials/lineupCarousel.php";
-}
+    function addRegisterForm($emailAlreadyInUse)
+    {
+        include ROOT_PATH . "views/partials/registerForm.php";
+    }
 
-function addShowContent($show)
-{
-    include ROOT_PATH . "views/partials/showContent.php";
-}
+    function buildErrorPage($message)
+    {
+        $this->addHead("Foutmelding");
+        $this->addNavBar(null);
+        $this->addError($message);
+        $this->addFooter();
+    }
 
-function addError($message)
-{
-    include ROOT_PATH . "views/partials/error.php";
-}
+    function addHead($title)
+    {
+        include ROOT_PATH . "views/partials/head.php";
+    }
 
-function addRegisterForm($emailAlreadyInUse)
-{
-    include ROOT_PATH . "views/partials/registerForm.php";
-}
+    function addNavBar($currentPage)
+    {
+        include ROOT_PATH . "views/partials/nav.php";
+    }
 
-function buildErrorPage($message)
-{
-    addHead("Foutmelding");
-    addNavBar(null);
-    addError($message);
-    addFooter();
-}
+    function addError($message)
+    {
+        include ROOT_PATH . "views/partials/error.php";
+    }
 
-function addContactForm($sessionEmail, $sessionName)
-{
-    include ROOT_PATH . "views/partials/contactForm.php";
-}
+    function addFooter()
+    {
+        include ROOT_PATH . "views/partials/footer.php";
+    }
 
-function addNews()
-{
-    include ROOT_PATH . "views/partials/news.php";
+    function addContactForm($sessionEmail, $sessionName)
+    {
+        include ROOT_PATH . "views/partials/contactForm.php";
+    }
+
+    function addNewsList()
+    {
+        include ROOT_PATH . "views/partials/newsList.php";
+    }
+
+    function addCreateNews()
+    {
+        include ROOT_PATH . "views/partials/admin/newsForm.php";
+    }
+
+    function addNewsComments($newsItem)
+    {
+        include ROOT_PATH . "views/partials/newsComments.php";
+    }
+
+    function buildLoginPage()
+    {
+        $this->addHead("Login");
+        $this->addNavBar("login");
+        include ROOT_PATH . "views/partials/loginForm.php";
+        $this->addFooter();
+    }
+
+    function addLoginForm()
+    {
+        include ROOT_PATH . "views/partials/loginForm.php";
+    }
+
+    function addShowForm()
+    {
+        include ROOT_PATH . "views/partials/admin/showForm.php";
+    }
 }

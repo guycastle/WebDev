@@ -15,9 +15,9 @@
         <div class="form-group has-feedback">
             <label for="inputContent" class="col-offset-2 col-lg-2 control-label">Inhoud</label>
             <div class="input-group col-lg-8">
-        <textarea class="form-control" rows="5"
-                  placeholder="Inhoud hier" id="inputContent" name="content"
-                  required data-error="Gelieve de inhoud in te vullen"></textarea>
+                <textarea class="form-control" rows="5"
+                          placeholder="Inhoud hier" id="inputContent" name="content"
+                          required data-error="Gelieve de inhoud in te vullen"></textarea>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors"></div>
             </div>

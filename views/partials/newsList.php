@@ -13,7 +13,7 @@
         echo "<h1>Nieuws</h1>";
         foreach ($newsitems as $newsitem) {
             $fmtTime = strftime("%A, %d %B %Y om %H:%M", strtotime($newsitem->time));
-            $commentURL = "comments?id=" . $newsitem->id;
+            $commentURL = "comments.php?id=" . $newsitem->id;
             $linkText = empty($storage->getCommentsForNewsItem($newsitem->id)) ? "Reageer" : "Bekijk reacties";
             echo "<div class='newsItem'><a class='unobtrusiveLink' href=''><h4>$newsitem->title</h4></a>\n
                 <div class='well well-lg newsWell'>\n

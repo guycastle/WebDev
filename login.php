@@ -5,10 +5,10 @@
  * Date: 22/05/2016
  * Time: 04:56
  */
+include "php/PageBuilder.php";
+$pBuilder = new PageBuilder();
 //Check if correct method is used
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include "php/PageBuilder.php";
-    $pBuilder = new PageBuilder();
     if (isset($_POST["logout"]) && $_POST["logout"] == "logout") {
         session_unset();
         session_destroy();
@@ -40,4 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
+} else {
+    $pBuilder->buildLoginPage();
 }

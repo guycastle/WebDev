@@ -1,5 +1,6 @@
 INSERT INTO users(name, surname, email, password, admin) VALUES ('Guillaume', 'Vandecasteele', 'vdcguillaume@gmail.com', '$2y$10$TGE/oJR2XJTpb0H3EE1fmeEo4RUNcCsgVcauhuaPBVCOSi4a3WAeq', true);
-INSERT INTO users(name, surname, email, password, admin) VALUES ('admin', 'admin', 'admin@indiegent.', '$2y$10$TGE/oJR2XJTpb0H3EE1fmeEo4RUNcCsgVcauhuaPBVCOSi4a3WAeq', true);
+INSERT INTO users (name, surname, email, password, admin)
+VALUES ('admin', 'admin', 'admin@indiegent.be', '$2y$10$TGE/oJR2XJTpb0H3EE1fmeEo4RUNcCsgVcauhuaPBVCOSi4a3WAeq', TRUE);
 
 INSERT INTO shows(artist, description, time, day, spotify_embed_code)
 VALUES

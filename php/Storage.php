@@ -163,7 +163,17 @@ class Storage
         }
         return $returnValue;
     }
-    
+
+    public function createNewsItem($title, $content)
+    {
+        $stmt = $this->mysqli->prepare("INSERT INTO news_items(title, content, time) VALUES(?, ?, NOW())");
+        $stmt->bind_param("ss", $title, $content);
+        if ($stmt->execute()) {
+            //return the newly created user object
+            return $this->getNewsItem($this->mysqli->insert_id);
+        }
+    }
+
     public function getNewsItem($id) {
         $stmt = $this->mysqli->prepare("SELECT * FROM news_items WHERE id = ?");
         $stmt->bind_param("s", $id);
@@ -172,15 +182,6 @@ class Storage
             if ($temp->num_rows > 0) {
                 return $temp->fetch_object();
             }
-        }
-    }
-
-    public function createNewsItem($title, $content) {
-        $stmt = $this->mysqli->prepare("INSERT INTO news_items(title, content, time) VALUES(?, ?, NOW())");
-        $stmt->bind_param("ss", $title, $content);
-        if ($stmt->execute()) {
-            //return the newly created user object
-            return $this->getNewsItem($this->mysqli->insert_id);
         }
     }
     
@@ -197,5 +198,39 @@ class Storage
             }
         }
         return $returnValue;
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("d", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+
+    public function createComment($userId, $newsItemId, $content)
+    {
+        $stmt = $this->mysqli->prepare("INSERT INTO comments(user_id, news_item_id, content, time) VALUES(?, ?, ?, NOW())");
+        $stmt->bind_param("dds", $userId, $newsItemId, $content);
+        if ($stmt->execute()) {
+            //return the newly created user object
+            return $this->getComment($this->mysqli->insert_id);
+        }
+    }
+
+    public function getComment($id)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM comments WHERE id = ?");
+        $stmt->bind_param("d", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
     }
 }

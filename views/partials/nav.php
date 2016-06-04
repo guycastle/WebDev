@@ -37,7 +37,7 @@
                                 }
                                 ?>
                             </ul>
-                            <li><a href="#contact">About</a></li>
+                            <li><a href="/about.php">About</a></li>
                             <?php
                             if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"]) && isset($_SESSION["userId"])) {
                                 $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);
@@ -62,6 +62,9 @@
                                 } ?>>Contact</a></li>
                         </ul>
                         <!-- Can't get chrome to stop autofilling password fields-->
+                        <?php
+                        if ($currentPage != "login") {
+                        ?>
                         <form class="navbar-form navbar-right" id='login-form' action="/login.php" method="post"
                               autocomplete="off" data-toggle="validator">
                             <?php
@@ -87,6 +90,7 @@
                                     </div>\n
                                     <button type=\"submit\" class=\"btn btn-grey\" id='loginButton'>Log in</button>\n
                                     <a href='register.php' class='btn btn-grey'>Registreer</a>\n";
+                            }
                             }
                             ?>
                         </form>

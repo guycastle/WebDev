@@ -6,6 +6,7 @@
  * Time: 02:18
  */
 include "../php/PageBuilder.php";
+$pBuilder = new PageBuilder();
 $storage = new Storage();
 if (!isset($_SESSION["userId"]) && !isset($_SESSION["email"])) {
     header("Location:/");
@@ -18,13 +19,13 @@ else {
             $newsContent = htmlspecialchars($_POST["content"]);
             $newsItem = $storage->createNewsItem($newsTitle, $newsContent);
             if (isset($newsItem) && !empty($newsItem)) {
-                header("Location:/comments?id=" . $newsItem->id);
+                header("Location:/comments.php?id=" . $newsItem->id);
             }
         }
-        addHead("Admin");
-        addNavBar("admin");
-        addCreateNews();
-        addFooter();
+        $pBuilder->addHead("Admin");
+        $pBuilder->addNavBar("admin");
+        $pBuilder->addCreateNews();
+        $pBuilder->addFooter();
     }
     else {
         header("Location:/");

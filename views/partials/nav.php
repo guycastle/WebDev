@@ -38,6 +38,9 @@
                                 ?>
                             </ul>
                             <li><a href="/about.php">About</a></li>
+                            <li><a href="/contact.php" <?php if ($currentPage == "contact") {
+                                    echo "class=\"active\"";
+                                } ?>>Contact</a></li>
                             <?php
                             if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"]) && isset($_SESSION["userId"])) {
                                 $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);
@@ -57,9 +60,6 @@
                                 }
                             }
                             ?>
-                            <li><a href="/contact.php" <?php if ($currentPage == "contact") {
-                                    echo "class=\"active\"";
-                                } ?>>Contact</a></li>
                         </ul>
                         <!-- Can't get chrome to stop autofilling password fields-->
                         <?php

@@ -126,3 +126,11 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:act
 .commentWell {
     background-color: #3d3d3d;
 }
+
+.file-preview {
+    background-color: white;
+}
+
+textarea {
+    resize: vertical;
+}

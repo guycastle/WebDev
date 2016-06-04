@@ -55,7 +55,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
         <div class="form-group has-feedback">
             <label for="inputSpotify" class="col-offset-2 col-lg-2 control-label">Spotify Embed Code</label>
             <div class="input-group col-lg-8">
-                <input type="text" class="form-control" name="spotify" id="inputSpotify" placeholder="Artist"
+                <input type="text" class="form-control" name="spotify" id="inputSpotify" placeholder="Spotify Embed Code"
                        pattern='<?php echo $pattern ?>' <?php echo isset($_POST["spotify"]) ? "value=\"" . htmlspecialchars($_POST["spotify"]) . "\"" : "" ?>
                        autofocus data-error="Gelieve een geldige spotify embed code in te vullen">
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -74,7 +74,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-lightgrey" id="registerButton">Registreer</button>
+                <button type="submit" class="btn btn-lightgrey" id="registerButton">Opslaan</button>
             </div>
         </div>
     </form>

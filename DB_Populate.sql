@@ -119,7 +119,7 @@ INSERT INTO tickets (day)
 VALUES
   ('Maandag'),
   ('Dinsdag'),
-  ('Woesnsdag'),
+  ('Woensdag'),
   ('Donderdag'),
   ('Vrijdag'),
   ('Zaterdag'),

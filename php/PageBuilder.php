@@ -98,4 +98,8 @@ class PageBuilder
     function addAboutContent() {
         include ROOT_PATH . "views/partials/aboutContent.php";
     }
+    
+    function addTicketsForm($user, $reservations) {
+        include ROOT_PATH . "views/partials/ticketsForm.php";
+    }
 }

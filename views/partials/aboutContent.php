@@ -9,5 +9,6 @@
         <li>De validatie van forms gebeurt client-side met de hulp van <a href="http://1000hz.github.io/bootstrap-validator/">Bootstrap Validator</a>.</li>
         <li>Voor het testen tijdens het opstellen van regular expressions is er gebruik gemaakt van <a href="https://regex101.com/">Regex 101</a>.</li>
         <li>Bij het uploaden van afbeeldingen om een nieuwe artiest aan de lineup toe te voegen maakt deze site gebruik van de <a href="https://github.com/kartik-v/bootstrap-fileinput">Bootstrap-Fileinput Plugin</a>.</li>
+        <li>De hover effecten op de lineup carousel op de index pagina zijn verwezenlijkt dankzij <a href="http://miketricking.github.io/dist/">Image Hover Effects</a> van Mike Young</li>
     </ul>
 </div>

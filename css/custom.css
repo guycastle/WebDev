@@ -1,3 +1,7 @@
+/**********************/
+/* Custom aanpassigen */
+/**********************/
+/*TODO - Put some order in this*/
 body {
     background-color: #2B2B2B;
 }
@@ -146,3 +150,20 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:act
 textarea {
     resize: vertical;
 }
+
+#navbar-tickets, #navbar-tickets:visited {
+    background-color: #656565;
+    color: #ffffff;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+#navbar-tickets:active {
+    background-color: #2b2b2b;
+}
+
+#navbar-tickets:hover {
+    background-color: #101010;
+    color: white;
+}
+

@@ -99,7 +99,7 @@ class PageBuilder
         include ROOT_PATH . "views/partials/aboutContent.php";
     }
     
-    function addTicketsForm($user, $reservations) {
+    function addTicketsForm($user, $reservations, $availableTickets) {
         include ROOT_PATH . "views/partials/ticketsForm.php";
     }
 }

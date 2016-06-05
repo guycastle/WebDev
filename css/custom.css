@@ -135,11 +135,11 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:act
     text-decoration: none;
 }
 
-.newsWell {
+.newsWell, .reservationWell {
     background-color: #5d5d5d;
 }
 
-.commentWell {
+.commentWell, .userWell {
     background-color: #3d3d3d;
 }
 
@@ -167,3 +167,7 @@ textarea {
     color: white;
 }
 
+.tableheading {
+    font-weight: bolder;
+    color: white;
+}

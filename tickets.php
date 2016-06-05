@@ -10,6 +10,7 @@ $pBuilder = new PageBuilder();
 $storage = new Storage();
 $user = null;
 $reservedTickets = null;
+$availableTickets = $storage->getAvailableTickets();
 if (isset($_SESSION["loggedIn"]) &&
     $_SESSION["loggedIn"] == true &&
     isset($_SESSION["userId"]) &&
@@ -22,7 +23,7 @@ if (isset($_SESSION["loggedIn"]) &&
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $pBuilder->addHead("Tickets Bestellen");
     $pBuilder->addNavBar("tickets");
-    $pBuilder->addTicketsForm($user, $reservedTickets);
+    $pBuilder->addTicketsForm($user, $reservedTickets, $availableTickets);
     $pBuilder->addFooter();
 }
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {

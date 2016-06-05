@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $email = $_POST["email"];
         $password = $_POST["password"];
-        if (!isset($email) || empty($email) || !isset($password) || empty($password) || filter_has_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!isset($email) || empty($email) || !isset($password) || empty($password) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $pBuilder->buildErrorPage("E-mail en/of paswoord niet ingevuld");
         } else {
             $user = $storage->getUserByEmail($email);

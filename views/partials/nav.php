@@ -24,14 +24,15 @@
                                aria-haspopup="true" aria-expanded="false">Lineup <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <?php
+                                $orderedDays = array("Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag");
                                 $storage = new Storage();
                                 $lineup = $storage->getLineupSortedByDay();
-                                foreach ($lineup as $day => $shows) {
-                                    echo "<li class=\"dropdown-header\">$day</li>\n";
+                                foreach ($lineup as $dayNumber => $shows) {
+                                    echo "<li class=\"dropdown-header\">$orderedDays[$dayNumber]</li>\n";
                                     foreach ($shows as $show) {
                                         echo "<li><a href=\"/artists.php?id=$show->id\">$show->artist</a></li>\n";
                                     }
-                                    if (sizeof($lineup) > 1 && end(array_keys($lineup)) != $day) {
+                                    if (sizeof($lineup) > 1 && end(array_keys($lineup)) != $dayNumber) {
                                         echo "<li role=\"separator\" class=\"divider\"></li>\n";
                                     }
                                 }
@@ -43,6 +44,10 @@
                             <li><a href="/contact.php" <?php if ($currentPage == "contact") {
                                     echo "class=\"active\"";
                                 } ?>>Contact</a></li>
+                            <li><a href="/tickets.php" id="navbar-tickets" <?php if ($currentPage == "tickets") {
+                                    echo "class=\"active\"";
+                                } ?>>
+                                    <strong>Tickets</strong></a></li>
                             <?php
                             if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"]) && isset($_SESSION["userId"])) {
                                 $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);

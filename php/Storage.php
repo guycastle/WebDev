@@ -10,6 +10,8 @@ class Storage
 {
     private $mysqli;
 
+    private $orderedDays = array("Maandag" => 0, "Dinsdag" => 1, "Woensdag" => 2, "Donderdag" => 3, "Vrijdag" => 4, "Zaterdag" => 5, "Zondag" => 6);
+
     public function __construct()
     {
         $this->mysqli = new mysqli("localhost", "owner", "owner", "festival");
@@ -51,15 +53,7 @@ class Storage
 
     public function getLineupSortedByDay()
     {
-        $returnValue = array();
-        $temp = $this->getOrderedLineup();
-        foreach ($temp as $show) {
-            if (!isset($returnValue[$show->day])) {
-                $returnValue[$show->day] = array();
-            }
-            array_push($returnValue[$show->day], $show);
-        }
-        return $returnValue;
+        return $this->sortLineupByDay($this->getOrderedLineup());
     }
 
     //Returns a multidimensional associative array with the day as key, an array of shows corresponding to that day
@@ -267,5 +261,53 @@ class Storage
         $stmt = $this->mysqli->prepare("DELETE FROM comments WHERE id = ?");
         $stmt->bind_param("d", $commentId);
         return $stmt->execute();
+    }
+
+    public function getReservations($userID) {
+        $returnValue = array();
+        $stmt = $this->mysqli->prepare("SELECT * FROM reservations WHERE user_id = ?");
+        $stmt->bind_param("d", $userID);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                while ($reservation = $temp->fetch_object()) {
+                    array_push($returnValue, $reservation);
+                }
+            }
+        }
+        return $this->sortArrayByDay($returnValue);
+    }
+
+    public function getAvailableTickets() {
+        $returnValue = array();
+        if ($temp = $this->mysqli->query("SELECT * FROM tickets")) {
+            if ($temp->num_rows > 0) {
+                while ($show = $temp->fetch_object()) {
+                    array_push($returnValue, $show);
+                }
+            }
+        }
+        return $this->sortArrayByDay($returnValue);
+    }
+
+    private function sortLineupByDay($array) {
+        $returnValue = array();
+        foreach ($array as $show) {
+            if (!isset($returnValue[$this->orderedDays[$show->day]])) {
+                $returnValue[$this->orderedDays[$show->day]] = array();
+            }
+            array_push($returnValue[$this->orderedDays[$show->day]], $show);
+        }
+        ksort($returnValue);
+        return $returnValue;
+    }
+
+    private function sortArrayByDay($array) {
+        $returnValue = array();
+        foreach ($array as $iDay) {
+            $returnValue[$this->orderedDays[$iDay->day]] = $iDay;
+        }
+        ksort($returnValue);
+        return $returnValue;
     }
 }

@@ -114,3 +114,13 @@ VALUES
   ('9', 'jpg'),
   ('9', 'jpg'),
   ('9', 'jpg');
+
+INSERT INTO tickets (day)
+VALUES
+  ('Maandag'),
+  ('Dinsdag'),
+  ('Woesnsdag'),
+  ('Donderdag'),
+  ('Vrijdag'),
+  ('Zaterdag'),
+  ('Zondag');

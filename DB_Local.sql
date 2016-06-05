@@ -58,8 +58,9 @@ CREATE TABLE tickets (
 CREATE TABLE reservations (
   user_id           BIGINT NOT NULL,
   day               VARCHAR(16) NOT NULL,
-  amount            INT NOT NULL DEFAULT 0
-)
+  amount            INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, user_id)
+);
 
 ALTER TABLE users ADD CONSTRAINT UK_users_1 UNIQUE (email);
 

@@ -23,10 +23,17 @@
             }
             $picture = $storage->getSingleImageFor($show->id);
             if (isset($picture) && file_exists("img/$picture->id.$picture->extension")) {
+                $fmtTime = ucfirst(strftime("%A, %d %B om %Hu%M", strtotime($show->time)));
+                //Description can be overly long, so let's just explode it at the first break
+                $paragraph = explode("<br />", $show->description)[0];
                 echo "<div class=\"$class\">\n
-                <div class='coverphoto'>
+                <div class='coverphoto hovereffect'>                       
                     <a href='artists.php?id=$show->id'><img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\"></a>\n
-                    <div class=\"container\">\n
+                    <div class='overlay container'>
+                    <h2>$fmtTime</h2>
+                    <h4 class='col-lg-6 col-lg-offset-3'>$paragraph</h4>
+                    </div>
+                    <div class=\"container\">\n                     
                         <div class=\"carousel-caption\">\n
                             <h1>$show->artist</h1>\n
                         </div>\n

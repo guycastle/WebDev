@@ -12,7 +12,6 @@ CREATE TABLE users (
   admin    BOOL                  DEFAULT FALSE,
   email    VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  tickets  INT                   DEFAULT 0,
   PRIMARY KEY (id)
 );
 
@@ -50,11 +49,17 @@ CREATE TABLE comments (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE available_tickets (
-  day               INT NOT NULL,
+CREATE TABLE tickets (
+  day               VARCHAR(16) NOT NULL,
   available_tickets INT DEFAULT 10000,
   PRIMARY KEY (day)
 );
+
+CREATE TABLE reservations (
+  user_id           BIGINT NOT NULL,
+  day               VARCHAR(16) NOT NULL,
+  amount            INT NOT NULL DEFAULT 0
+)
 
 ALTER TABLE users ADD CONSTRAINT UK_users_1 UNIQUE (email);
 
@@ -63,6 +68,10 @@ ALTER TABLE pictures ADD CONSTRAINT FK_pictures_1 FOREIGN KEY (show_id) REFERENC
 ALTER TABLE comments ADD CONSTRAINT FK_comments_1 FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE CASCADE;
 
 ALTER TABLE comments ADD CONSTRAINT FK_comments_2 FOREIGN KEY (news_item_id) REFERENCES news_items (id) ON UPDATE CASCADE;
+
+ALTER TABLE reservations ADD CONSTRAINT FK_reservations_1 FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE CASCADE;
+
+ALTER TABLE reservations ADD CONSTRAINT FK_reservations_2 FOREIGN KEY (day) REFERENCES tickets (day) ON UPDATE CASCADE;
 
 GRANT ALL ON festival.* TO 'owner'@'localhost'
 IDENTIFIED BY 'owner';

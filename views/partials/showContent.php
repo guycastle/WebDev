@@ -54,7 +54,7 @@ if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
     </a>
 </div>
 <?php
-$spotify = $show->spotify_embed_code;
+$spotify = $show->spotify_uri;
 ?>
 <div class="container description">
     <div class="row">
@@ -63,6 +63,7 @@ $spotify = $show->spotify_embed_code;
             //Convert the DB timestamp (which is a string apparently) to a time, in order to format that to a particular
             //string and the uppercase that first letter. Not using the day property of the show object, using the actual
             //day to prevent confusion. The day property is of import for ticketing purposes, not actual timetelling
+            
             $fmtTime = ucfirst(strftime("%A, %d %B om %Hu%M", strtotime($show->time)));
             echo "<h1>$fmtTime</h1>";
             echo "<h2>Over $show->artist</h2>\n
@@ -74,9 +75,10 @@ $spotify = $show->spotify_embed_code;
         </div>
         <?php
         if (isset($spotify)) {
+            $encodedURI = urlencode($spotify);
             echo "<div class='col-lg-4'>\n\t
                 <h2>Beluister</h2>\n\t
-                $show->spotify_embed_code\n
+                <iframe src=\"https://embed.spotify.com/?uri=$encodedURI\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>\n
                 </div>\n";
         }
         ?>

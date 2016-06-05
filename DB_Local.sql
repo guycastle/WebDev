@@ -19,31 +19,31 @@ CREATE TABLE users (
 CREATE TABLE shows (
   id                 BIGINT        NOT NULL AUTO_INCREMENT,
   artist             VARCHAR(255)  NOT NULL,
-  description        VARCHAR(4096) NOT NULL,
+  description        TEXT NOT NULL,
   time               TIMESTAMP     NOT NULL,
   day                VARCHAR(16)   NOT NULL,
-  spotify_embed_code VARCHAR(255),
+  spotify_uri VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE pictures (
   id          BIGINT                   NOT NULL AUTO_INCREMENT,
   show_id     BIGINT                   NOT NULL,
-  cover_photo BOOL                              DEFAULT FALSE,
   extension   VARCHAR(4) DEFAULT 'jpg' NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE news_items (
   id      BIGINT        NOT NULL AUTO_INCREMENT,
-  content VARCHAR(4096) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
   time    TIMESTAMP     NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE comments (
   id           BIGINT        NOT NULL AUTO_INCREMENT,
-  content      VARCHAR(4096) NOT NULL,
+  content      TEXT NOT NULL,
   time         TIMESTAMP     NOT NULL,
   user_id      BIGINT        NOT NULL,
   news_item_id BIGINT        NOT NULL,

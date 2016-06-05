@@ -36,7 +36,7 @@ class Storage
     public function getPictures($showId)
     {
         $returnValue = array();
-        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? ORDER BY cover_photo ASC");
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ?");
         $stmt->bind_param("d", $showId);
         $stmt->execute();
         if ($temp = $stmt->get_result()) {
@@ -127,24 +127,14 @@ class Storage
         }
     }
 
-    public function getCoverImageFor($showId)
+    public function getSingleImageFor($showId)
     {
-        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? AND cover_photo = TRUE LIMIT 1");
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? LIMIT 1");
         $stmt->bind_param("d", $showId);
         $stmt->execute();
         if ($temp = $stmt->get_result()) {
             if ($temp->num_rows > 0) {
                 return $temp->fetch_object();
-            } else {
-                //Fallback in case no pictures have been designated as cover picture, try to get any picture for give artist
-                $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE show_id = ? LIMIT 1");
-                $stmt->bind_param("d", $showId);
-                $stmt->execute();
-                if ($temp = $stmt->get_result()) {
-                    if ($temp->num_rows > 0) {
-                        return $temp->fetch_object();
-                    }
-                }
             }
         }
     }
@@ -162,5 +152,114 @@ class Storage
             }
         }
         return $returnValue;
+    }
+
+    public function createNewsItem($title, $content)
+    {
+        $stmt = $this->mysqli->prepare("INSERT INTO news_items(title, content, time) VALUES(?, ?, NOW())");
+        $stmt->bind_param("ss", $title, $content);
+        if ($stmt->execute()) {
+            //return the newly created user object
+            return $this->getNewsItem($this->mysqli->insert_id);
+        }
+    }
+
+    public function getNewsItem($id) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM news_items WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+    
+    public function getCommentsForNewsItem($newsItemId) {
+        $returnValue = array();
+        $stmt = $this->mysqli->prepare("SELECT * FROM comments WHERE news_item_id = ? ORDER BY time ASC");
+        $stmt->bind_param("d", $newsItemId);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                while ($comment = $temp->fetch_object()) {
+                    array_push($returnValue, $comment);
+                }
+            }
+        }
+        return $returnValue;
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("d", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+
+    public function createComment($userId, $newsItemId, $content)
+    {
+        $stmt = $this->mysqli->prepare("INSERT INTO comments(user_id, news_item_id, content, time) VALUES(?, ?, ?, NOW())");
+        $stmt->bind_param("dds", $userId, $newsItemId, $content);
+        if ($stmt->execute()) {
+            //return the newly created user object
+            return $this->getComment($this->mysqli->insert_id);
+        }
+    }
+
+    public function getComment($id)
+    {
+        $stmt = $this->mysqli->prepare("SELECT * FROM comments WHERE id = ?");
+        $stmt->bind_param("d", $id);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+    
+    public function createShow($artist, $description, $time, $day, $spotify) {
+        $stmt = $this->mysqli->prepare("INSERT INTO shows(artist, description, time, day, spotify_uri) VALUES(?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $artist, $description, $time, $day, $spotify);
+        if ($stmt->execute()) {
+            return $this->getShow($this->mysqli->insert_id);
+        }
+    }
+    
+    public function createPicture($showId, $extension) {
+        $stmt = $this->mysqli->prepare("INSERT INTO pictures(show_id, extension) VALUES(?, ?)");
+        $stmt->bind_param("ss", $showId, $extension);
+        if ($stmt->execute()) {
+            return $this->getPicture($this->mysqli->insert_id);
+        }
+    }
+    
+    public function getPicture($pictureID) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE id = ?");
+        $stmt->bind_param("d", $pictureID);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+
+    public function deleteShow($showId) {
+        $stmt = $this->mysqli->prepare("DELETE FROM shows WHERE id = ?");
+        $stmt->bind_param("d", $pictureID);
+        $stmt->execute();
+        if ($stmt->affected_rows == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

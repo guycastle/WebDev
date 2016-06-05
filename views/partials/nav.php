@@ -37,7 +37,12 @@
                                 }
                                 ?>
                             </ul>
-                            <li><a href="#contact">About</a></li>
+                            <li><a href="/about.php"<?php if ($currentPage == "about") {
+                                    echo "class=\"active\"";
+                                } ?>>About</a></li>
+                            <li><a href="/contact.php" <?php if ($currentPage == "contact") {
+                                    echo "class=\"active\"";
+                                } ?>>Contact</a></li>
                             <?php
                             if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"]) && isset($_SESSION["userId"])) {
                                 $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);
@@ -49,19 +54,18 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="admin/news.php">Nieuwsitem aanmaken</a></li>
-                                        <li><a href="admin/lineup.php">Toevoegen aan lineup</a></li>
-                                        <li><a href="admin/edit.php">Show aanpassen</a></li>
+                                        <li><a href="/admin/news.php">Nieuwsitem aanmaken</a></li>
+                                        <li><a href="/admin/lineup.php">Toevoegen aan lineup</a></li>
                                     </ul>
                                     <?php
                                 }
                             }
                             ?>
-                            <li><a href="/contact.php" <?php if ($currentPage == "contact") {
-                                    echo "class=\"active\"";
-                                } ?>>Contact</a></li>
                         </ul>
                         <!-- Can't get chrome to stop autofilling password fields-->
+                        <?php
+                        if ($currentPage != "login") {
+                        ?>
                         <form class="navbar-form navbar-right" id='login-form' action="/login.php" method="post"
                               autocomplete="off" data-toggle="validator">
                             <?php
@@ -87,6 +91,7 @@
                                     </div>\n
                                     <button type=\"submit\" class=\"btn btn-grey\" id='loginButton'>Log in</button>\n
                                     <a href='register.php' class='btn btn-grey'>Registreer</a>\n";
+                            }
                             }
                             ?>
                         </form>

@@ -5,9 +5,11 @@
  * Date: 20/05/2016
  * Time: 00:23
  */
-include "php/pageBuilder.php";
+include "php/PageBuilder.php";
+$pBuilder = new PageBuilder();
 
-addHead("Welkom");
-addNavBar("index");
-addLineupCarousel();
-addFooter();
+$pBuilder->addHead("Welkom");
+$pBuilder->addNavBar("index");
+$pBuilder->addLineupCarousel();
+$pBuilder->addNewsList();
+$pBuilder->addFooter();

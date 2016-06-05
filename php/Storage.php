@@ -10,6 +10,8 @@ class Storage
 {
     private $mysqli;
 
+    private $orderedDays = array("Maandag" => 0, "Dinsdag" => 1, "Woensdag" => 2, "Donderdag" => 3, "Vrijdag" => 4, "Zaterdag" => 5, "Zondag" => 6);
+
     public function __construct()
     {
         $this->mysqli = new mysqli("localhost", "owner", "owner", "festival");
@@ -54,11 +56,12 @@ class Storage
         $returnValue = array();
         $temp = $this->getOrderedLineup();
         foreach ($temp as $show) {
-            if (!isset($returnValue[$show->day])) {
-                $returnValue[$show->day] = array();
+            if (!isset($returnValue[$this->orderedDays[$show->day]])) {
+                $returnValue[$this->orderedDays[$show->day]] = array();
             }
-            array_push($returnValue[$show->day], $show);
+            array_push($returnValue[$this->orderedDays[$show->day]], $show);
         }
+        ksort($returnValue);
         return $returnValue;
     }
 

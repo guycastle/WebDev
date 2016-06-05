@@ -240,9 +240,9 @@ class Storage
         }
     }
     
-    public function getPicture($pictureID) {
+    public function getPicture($pictureId) {
         $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE id = ?");
-        $stmt->bind_param("d", $pictureID);
+        $stmt->bind_param("d", $pictureId);
         $stmt->execute();
         if ($temp = $stmt->get_result()) {
             if ($temp->num_rows > 0) {
@@ -252,14 +252,20 @@ class Storage
     }
 
     public function deleteShow($showId) {
-        $stmt = $this->mysqli->prepare("DELETE FROM shows WHERE id = ?");
-        $stmt->bind_param("d", $pictureID);
-        $stmt->execute();
-        if ($stmt->affected_rows == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        $stmt = $this->mysqli->prepare("DELETE pictures, shows FROM shows LEFT JOIN pictures ON shows.id = pictures.show_id WHERE shows.id = ?");
+        $stmt->bind_param("d", $showId);
+        return $stmt->execute();
+    }
+    
+    public function deleteNewsItem($newsItemId) {
+        $stmt = $this->mysqli->prepare("DELETE news_items, comments FROM news_items LEFT JOIN comments ON comments.news_item_id = news_items.id WHERE news_items.id = ?");
+        $stmt->bind_param("d", $newsItemId);
+        return $stmt->execute();
+    }
+    
+    public function deleteComment($commentId) {
+        $stmt = $this->mysqli->prepare("DELETE FROM comments WHERE id = ?");
+        $stmt->bind_param("d", $commentId);
+        return $stmt->execute();
     }
 }

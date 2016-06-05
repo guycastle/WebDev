@@ -57,6 +57,17 @@ if (!isset($pictures) || !is_array($pictures) || empty($pictures)) {
 $spotify = $show->spotify_uri;
 ?>
 <div class="container description">
+    <br>
+    <?php
+        if (isset($user) && $user->admin == true) {
+    ?>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <input name="showId" hidden value="<?php echo $show->id ?>">
+            <button type="submit" class="btn btn-danger btn-lg">Artiest en foto's verwijderen</button>
+        </form>
+    <?php
+    }
+    ?>
     <div class="row">
         <div class="<?php echo isset($spotify) ? "col-lg-8" : "col-lg-12" ?>">
             <?php

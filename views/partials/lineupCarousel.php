@@ -28,11 +28,11 @@
                 $paragraph = explode("<br />", $show->description)[0];
                 echo "<div class=\"$class\">\n
                 <div class='coverphoto hovereffect'>                       
-                    <a href='artists.php?id=$show->id'><img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\"></a>\n
-                    <div class='overlay container'>
+                    <img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\">\n
+                    <a href='artists.php?id=$show->id' class='unobtrusiveLink'><div class='overlay container'>
                     <h2>$fmtTime</h2>
                     <h4 class='col-lg-6 col-lg-offset-3'>$paragraph</h4>
-                    </div>
+                    </div></a>
                     <div class=\"container\">\n                     
                         <div class=\"carousel-caption\">\n
                             <h1>$show->artist</h1>\n

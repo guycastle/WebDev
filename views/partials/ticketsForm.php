@@ -74,6 +74,7 @@
             </div>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-lg-offset-1 col-lg-10 text-center">
             <?php
@@ -81,7 +82,56 @@
                 echo "<h1>Om tickets te kopen dient u ingelogd te zijn</h1>";
                 echo "<a href='/login.php' class='btn btn-lg btn-grey'>Inloggen</a>";
             }
+            else {
+                $basket = null;
+                if (!isset($_SESSION["basket"])) {
+                    $basket = array();
+                }
+                else {
+                    $basket = $_SESSION["basket"];
+                }
+            ?>
+            <div class='row'>
+                <div class='col-lg-8'>
+                    <form class="form-horizontal" data-toggle="validator" id="show-form" method="post"
+                          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                        <div class="form-group has-feedback">
+                            <label for="inputDay" class="col-offset-2 col-lg-2 control-label">Dag</label>
+                            <div class="input-group col-lg-8">
+                                <select required data-error="Gelieve een dag te kiezen" name="day" id="inputDay" class="form-control">
+                                    <option value="" disabled selected>Kies een dag</option>
+                                    <?php
+                                        foreach($availableTickets as $dayTicket) {
+                                            echo "<option value='$dayTicket->day' amount='$dayTicket->available_tickets'>$dayTicket->day</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label for="inputAmount" class="col-offset-2 col-lg-2 control-label">Hoeveelheid</label>
+                            <div class="input-group col-lg-8">
+                                <input type="number" class="form-control" required
+                                       data-error="Gelieve een geldige hoeveelheid in te geven" name="amount" id="inputAmount"
+                                min="1">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-lightgrey" id="registerButton">Opslaan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <?php
+            }
             ?>
         </div>
     </div>
 </div>
+<script src="/js/custom.js">

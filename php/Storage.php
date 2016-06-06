@@ -310,4 +310,21 @@ class Storage
         ksort($returnValue);
         return $returnValue;
     }
+
+    public function getAvailableTicketsByDay($day) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM tickets WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+    
+    public function createAvailableTickets($day) {
+        $stmt = $this->mysqli->prepare("INSERT INTO tickets (day) VALUE (?)");
+        $stmt->bind_param("s", $day);
+        return $stmt->execute();
+    }
 }

@@ -44,6 +44,11 @@ else {
                         }
                     }
                 }
+                //Check if day with available tickets already exists, create DB entry if not
+                $avTckt = $storage->getAvailableTicketsByDay($day);
+                if (!isset($avTckt)) {
+                    $storage->createAvailableTickets($day);
+                }
                 if (empty($storage->getPictures($newShow->id))) {
                     //If we failed to upload the pictures, delete the show and inform the user to try again.
                     $storage->deleteShow($newShow->id);

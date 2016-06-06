@@ -154,8 +154,9 @@ textarea {
 #navbar-tickets, #navbar-tickets:visited {
     background-color: #656565;
     color: #ffffff;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    font-weight: bolder;
 }
 
 #navbar-tickets:active {
@@ -170,4 +171,9 @@ textarea {
 .tableheading {
     font-weight: bolder;
     color: white;
+}
+
+.cart-badge {
+    background-color: white;
+    color: black;
 }

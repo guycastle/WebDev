@@ -47,7 +47,7 @@
                             <li><a href="/tickets.php" id="navbar-tickets" <?php if ($currentPage == "tickets") {
                                     echo "class=\"active\"";
                                 } ?>>
-                                    <strong>Tickets</strong></a></li>
+                                    Tickets <span class="glyphicon glyphicon-shopping-cart badge cart-badge" aria-hidden="true"> 1</span></a></li>
                             <?php
                             if (isset($_SESSION["loggedIn"]) && isset($_SESSION["email"]) && isset($_SESSION["userId"])) {
                                 $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);

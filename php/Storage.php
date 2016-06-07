@@ -359,4 +359,37 @@ class Storage
         $stmt->bind_param("s", $day);
         return $stmt->execute();
     }
+
+    public function createOrUpdateReservation($userId, $day, $amount) {
+        $returnValue = false;
+        try {
+            echo "pipi";
+            $this->mysqli->autocommit(false);
+            $stmt = $this->mysqli->prepare("UPDATE tickets SET available_tickets = available_tickets - ? WHERE day = ? AND available_tickets - ? >= 0");
+            $stmt->bind_param("dsd", $amount, $day, $amount);
+            $stmt->execute();
+            if ($temp = $stmt->get_result()) {
+                if ($temp->num_rows > 0) {
+                    $stmt = $this->mysqli->prepare("INSERT INTO reservations (day, user_id, amount) VALUES (?,?,?) ON DUPLICATE KEY UPDATE amount = amount + ?");
+                    $stmt->bind_param("sddd", $day, $userId, $amount, $amount);
+                    $stmt->execute();
+                    $returnValue = $stmt->get_result()->num_rows > 0;
+                }
+            }
+            else {
+                $stmt = $this->mysqli->prepare("UPDATE tickets SET available_tickets = available_tickets + ? WHERE day = ?");
+                $stmt->bind_param("ds", $amount, $day);
+                $stmt->execute();
+            }
+            $this->mysqli->commit();
+        }
+        catch (\mysqli_sql_exception $ex) {
+            $this->mysqli->rollback();
+            throw $ex;
+        }
+        finally {
+            $this->mysqli->autocommit(true);
+            return $returnValue;
+        }
+    }
 }

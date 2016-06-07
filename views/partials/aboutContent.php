@@ -11,5 +11,7 @@
         <li>Bij het uploaden van afbeeldingen om een nieuwe artiest aan de lineup toe te voegen maakt deze site gebruik van de <a href="https://github.com/kartik-v/bootstrap-fileinput">Bootstrap-Fileinput Plugin</a>.</li>
         <li>De hover effecten op de lineup carousel op de index pagina zijn verwezenlijkt dankzij <a href="http://miketricking.github.io/dist/">Image Hover Effects</a> van Mike Young</li>
         <li>Firefox en sommige andere browsers ondersteunen de input type <code>datetime-local</code> niet dus maakt deze site gebruik van <a href="https://eonasdan.github.io/bootstrap-datetimepicker/">Bootstrap 3 Datepicker</a> </li>
+        <li>Om in de payment engine een unieke transactie id te creëren wordt gebruik gemaakt van code dat op <a href="http://php.net/manual/en/function.com-create-guid.php">PHP.net</a> gepost werd</li>
+        <li>De draaiende loading spinner die gebruikt wordt bij het redirecten naar de betalingsinstelling is opgemaakt met de code van <a href="https://paulund.co.uk/css-loading-spinners">CSS Loading Spinners</a></li>
     </ul>
 </div>

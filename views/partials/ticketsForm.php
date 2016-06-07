@@ -180,7 +180,6 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <input type="hidden" value="<?php echo $total?>"
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" name="payForBasket" value="payForBasket" class="btn btn-lightgrey">Betalen</button>

@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="form-group has-feedback">
-                            <label for="inputAmount" class="col-offset-2 col-lg-2 control-label">Hoeveelheid</label>
+                            <label for="inputAmount" class="col-offset-2 col-lg-2 control-label">Aantal</label>
                             <div class="input-group col-lg-8">
                                 <input type="number" class="form-control" required
                                        data-error="Gelieve een geldige hoeveelheid in te geven" name="amount"
@@ -114,7 +114,6 @@
                                        min="1" placeholder="1">
                                 <span class="input-group-addon " id="price">&euro;</span>
                             </div>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group has-feedback">
@@ -142,7 +141,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <form></form>
                             <?php
                                 $total = 0;
                                 foreach($basket as $day => $amount) {
@@ -163,6 +161,33 @@
                             ?>
                             </tbody>
                         </table>
+                        <div class="container">
+                            <form class="form-horizontal" data-toggle="validator" id="payment-form" method="post"
+                                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                <div class="form-group has-feedback">
+                                    <label for="inputPaymentOption" class="col-offset-2 col-lg-2 control-label">Betaalmethode</label>
+                                    <div class="input-group col-lg-8">
+                                        <select required data-error="Gelieve een dag te kiezen" name="paymentOption" id="inputPaymentOption"
+                                                class="form-control">
+                                            <option value="" disabled selected>Kies een betaalmethode</option>
+                                            <?php
+                                            foreach (array_keys($paymentOptions) as $paymentOption) {
+                                                echo "<option value='$paymentOption'>$paymentOption</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="<?php echo $total?>"
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" name="payForBasket" value="payForBasket" class="btn btn-lightgrey">Betalen</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <?php

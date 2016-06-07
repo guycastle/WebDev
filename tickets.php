@@ -6,8 +6,10 @@
  * Time: 19:28
  */
 include "php/PageBuilder.php";
+include "php/PaymentEngine.php";
 $pBuilder = new PageBuilder();
 $storage = new Storage();
+$paymentEngine = new PaymentEngine();
 $user = null;
 $reservedTickets = null;
 $availableTickets = $storage->getAvailableTickets();
@@ -24,7 +26,7 @@ if (isset($_SESSION["loggedIn"]) &&
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $pBuilder->addHead("Tickets Bestellen");
     $pBuilder->addNavBar("tickets");
-    $pBuilder->addTicketsForm($user, $reservedTickets, $availableTickets, $priceList);
+    $pBuilder->addTicketsForm($user, $reservedTickets, $availableTickets, $priceList, $paymentEngine->getPaymentOptions());
     $pBuilder->addFooter();
 }
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {

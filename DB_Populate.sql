@@ -115,8 +115,8 @@ VALUES
   ('9', 'jpg'),
   ('9', 'jpg');
 
-INSERT INTO tickets (day)
+INSERT INTO tickets (day, available_tickets)
 VALUES
-  ('Vrijdag'),
-  ('Zaterdag'),
-  ('Zondag');
+  ('Vrijdag', 505),
+  ('Zaterdag', 2000),
+  ('Zondag', 6000);

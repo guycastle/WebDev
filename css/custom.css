@@ -215,3 +215,7 @@ textarea {
     border: none;
     outline: none;
 }
+
+#inputPaymentOption {
+    width: 25rem;
+}

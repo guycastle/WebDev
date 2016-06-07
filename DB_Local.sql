@@ -52,6 +52,7 @@ CREATE TABLE comments (
 CREATE TABLE tickets (
   day               VARCHAR(16) NOT NULL,
   available_tickets INT DEFAULT 10000,
+  price             DECIMAL NOT NULL DEFAULT 75,
   PRIMARY KEY (day)
 );
 

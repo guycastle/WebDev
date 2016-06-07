@@ -5,6 +5,8 @@
 //with the amount of available tickets.
 $("#inputDay").change(function () {
     var maxAvailable = $('option:selected', this).attr('amount');
-    console.log(maxAvailable);
+    var price = $('option:selected', this).attr('price');
+    $("#price").html(price + "&euro;");
     $("#inputAmount").prop('max', maxAvailable);
-})
+    $("#inputAmount").prop('value', 1);
+});

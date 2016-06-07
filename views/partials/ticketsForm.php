@@ -12,11 +12,11 @@
         <div class="row">
             <div class="well well-lg reservationWell">
                 <div class="row">
-                    <div class="col-lg-6 well well-lg userWell">
+                    <div class="col-lg-6">
                         <p>Dag <?php echo $user->name?>, dit zijn de tickets die je reeds besteld hebt.
                             Moest je nog bijkomende tickets wensen, bestel er gerust via onderstaande formulier</p>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 well well-lg userWell">
                         <table class="table table-responsive">
                             <thead>
                             <tr>
@@ -75,35 +75,30 @@
         </div>
     </div>
     <br>
+    <br><br>
     <div class="row">
-        <div class="col-lg-offset-1 col-lg-10 text-center">
             <?php
             if (!isset($user)) {
+                echo "<div class=\"col-lg-offset-1 col-lg-10 text-center\">";
                 echo "<h1>Om tickets te kopen dient u ingelogd te zijn</h1>";
-                echo "<a href='/login.php' class='btn btn-lg btn-grey'>Inloggen</a>";
+                echo "<a href='/login.php' class='btn btn-lg btn-grey'>Inloggen</a></div>";
             }
             else {
-                $basket = null;
-                if (!isset($_SESSION["basket"])) {
-                    $basket = array();
-                }
-                else {
-                    $basket = $_SESSION["basket"];
-                }
             ?>
             <div class='row'>
-                <div class='col-lg-8'>
-                    <form class="form-horizontal" data-toggle="validator" id="show-form" method="post"
+                <div class='col-lg-5'>
+                    <form class="form-horizontal basket-form" data-toggle="validator" id="show-form" method="post"
                           action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                         <div class="form-group has-feedback">
                             <label for="inputDay" class="col-offset-2 col-lg-2 control-label">Dag</label>
                             <div class="input-group col-lg-8">
-                                <select required data-error="Gelieve een dag te kiezen" name="day" id="inputDay" class="form-control">
+                                <select required data-error="Gelieve een dag te kiezen" name="day" id="inputDay"
+                                        class="form-control">
                                     <option value="" disabled selected>Kies een dag</option>
                                     <?php
-                                        foreach($availableTickets as $dayTicket) {
-                                            echo "<option value='$dayTicket->day' amount='$dayTicket->available_tickets'>$dayTicket->day</option>";
-                                        }
+                                    foreach ($availableTickets as $dayTicket) {
+                                        echo "<option value='$dayTicket->day' amount='$dayTicket->available_tickets' price='$dayTicket->price'>$dayTicket->day</option>";
+                                    }
                                     ?>
                                 </select>
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -114,24 +109,67 @@
                             <label for="inputAmount" class="col-offset-2 col-lg-2 control-label">Hoeveelheid</label>
                             <div class="input-group col-lg-8">
                                 <input type="number" class="form-control" required
-                                       data-error="Gelieve een geldige hoeveelheid in te geven" name="amount" id="inputAmount"
-                                min="1">
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
+                                       data-error="Gelieve een geldige hoeveelheid in te geven" name="amount"
+                                       id="inputAmount"
+                                       min="1" placeholder="1">
+                                <span class="input-group-addon " id="price">&euro;</span>
                             </div>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <div class="help-block with-errors"></div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-lightgrey" id="registerButton">Opslaan</button>
+                        <div class="form-group has-feedback">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-lightgrey" name="addToBasket" value="addToBasket" id="registerButton">Toevoegen aan
+                                    mandje
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <?php
+                    if (isset($_SESSION["basket"]) && !empty($_SESSION["basket"])) {
+                        $basket = $_SESSION["basket"];
+                ?>
+                <div class="col-lg-7">
+                    <div class="well well-lg well-basket" rows="5">
+                        <table class="table table-responsive basket">
+                            <thead>
+                            <tr>
+                                <th>Dag</th>
+                                <th>Aantal</th>
+                                <th>Prijs</th>
+                                <th class="text-center">Verwijderen</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <form></form>
+                            <?php
+                                $total = 0;
+                                foreach($basket as $day => $amount) {
+                                    $subTotal = $amount * $priceList[$day];
+                                    $action = htmlspecialchars($_SERVER["PHP_SELF"]);
+                                    echo "<tr class='text-left'>
+                                            <th>$day</th>
+                                            <td>$amount</td>
+                                            <td>$subTotal</td>
+                                            <td class='text-center'><form method='post' action='$action'><button id='basket-delete' name='deleteFromBasket' value='$day' class='btn-xs btn-link btn-danger'><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button></form></td>
+                                        </tr>";
+                                    $total += $subTotal;
+                                }
+                                echo "<tr>
+                                        <th colspan='2'>Totaal:</th>
+                                        <td class='text-left' colspan='2'>$total&euro;</td>
+                                    </tr>";
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php
+                    }
+                }
+                ?>
             </div>
-            <?php
-            }
-            ?>
-        </div>
     </div>
 </div>
 <script src="/js/custom.js">

@@ -92,6 +92,10 @@ body {
     border-bottom-right-radius: 4px;
 }
 
+#login-form .input-group .form-control {
+    width: 25rem;
+}
+
 .dropdown-menu {
     background-color: #3b3b3b;
     border-bottom-left-radius: 4px;
@@ -174,4 +178,44 @@ textarea {
 .cart-badge {
     background-color: white;
     color: #656565;
+}
+
+.btn-logout {
+    background: transparent;
+}
+
+.navbar-btn-logout {
+    outline: none;
+    border: none;
+    height: 100%;
+}
+
+.logout-form {
+    height: 50px;
+}
+
+.navbar-btn-logout:hover {
+    background-color: #080808;
+}
+
+.navbar-btn-logout:focus, .navbar-btn-logout:visited {
+    background-color: #232323;
+}
+
+.well-basket {
+    background-color: #9d9d9d;
+    color: #0f0f0f;
+}
+
+#basket-delete > span {
+    color: #d43f3a;
+}
+
+#basket-delete:focus {
+    border: none;
+    outline: none;
+}
+
+.input-group {
+    max-width: 400px;
 }

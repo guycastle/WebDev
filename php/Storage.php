@@ -327,4 +327,16 @@ class Storage
         $stmt->bind_param("s", $day);
         return $stmt->execute();
     }
+
+    public function getPricelist() {
+        $returnValue = array();
+        if ($temp = $this->mysqli->query("SELECT day, price FROM tickets")) {
+            if ($temp->num_rows > 0) {
+                while ($ticket = $temp->fetch_object()) {
+                    $returnValue[$ticket->day] = $ticket->price;
+                }
+            }
+        }
+        return $returnValue;
+    }
 }

@@ -70,36 +70,46 @@
                         <!-- Can't get chrome to stop autofilling password fields-->
                         <?php
                         if ($currentPage != "login") {
+                        if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
+                            $name = $_SESSION["name"];
                         ?>
-                        <form class="navbar-form navbar-right" id='login-form' action="/login.php" method="post"
-                              autocomplete="off" data-toggle="validator">
-                            <?php
-                            if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true && isset($_SESSION["name"]) && !empty($_SESSION["name"])) {
-                                $name = $_SESSION["name"];
-                                echo "<div class=\"form-group\">
-                                    <div class='navbar-text'>Welkom, $name</div>
-                                    <input type='hidden' value='logout' name='logout'>
-                                    </div>
-                                    <button type=\"submit\" class=\"btn btn-grey\">Uitloggen</button>";
-                            } else {
-                                echo "<div class=\"form-group has-feedback\">\n
-                                        <div class='input-group'>\n
-                                        <input name=\"email\" type=\"email\" placeholder=\"Email\" class=\"form-control\" id='loginEmail' required>\n
-                                        <span class=\"glyphicon form-control-feedback\" aria-hidden=\"true\"></span>\n
-                                    </div>\n
-                                    </div>\n
-                                    <div class=\"form-group has-feedback\">\n\t
-                                        <div class='input-group'>\n
-                                        <input name=\"password\" type=\"password\" placeholder=\"Password\" class=\"form-control\" id='loginPass' required>\n
-                                        <span class=\"glyphicon form-control-feedback\" aria-hidden=\"true\"></span>\n
-                                    </div>\n
-                                    </div>\n
-                                    <button type=\"submit\" class=\"btn btn-grey\" id='loginButton'>Log in</button>\n
-                                    <a href='register.php' class='btn btn-grey'>Registreer</a>\n";
-                            }
-                            }
-                            ?>
-                        </form>
+                        <div class="nav navbar-nav navbar-right">
+                            <form  action="/login.php" method="post" class="logout-form">
+                                <button type="submit" name="logout" value="logout" class="btn-link navbar-btn-logout"><span class="glyphicon glyphicon-log-out navbar-text" aria-hidden="true"></span></button>
+                            </form>
+                        </div>
+                        <?php
+                        }
+                        else {
+                        ?>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown" id="menuLogin">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
+                                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                                </a>
+                                <div class="dropdown-menu" style="padding:17px;">
+                                    <form id='login-form' action="/login.php" method="post" autocomplete="off" data-toggle="validator">
+                                        <div class="form-group has-feedback">
+                                            <div class='input-group'>
+                                                <input name="email" type="email" placeholder="Email" class="form-control" id='loginEmail' required>
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <div class='input-group'>
+                                                <input name="password" type="password" placeholder="Password" class="form-control" id='loginPass' required>
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-grey" id='loginButton'>Log in</button>
+                                        <a href='register.php' class='btn btn-grey'>Registreer</a>
+                        <?php }
+                        }
+                        ?>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>

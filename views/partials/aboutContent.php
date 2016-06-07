@@ -10,5 +10,6 @@
         <li>Voor het testen tijdens het opstellen van regular expressions is er gebruik gemaakt van <a href="https://regex101.com/">Regex 101</a>.</li>
         <li>Bij het uploaden van afbeeldingen om een nieuwe artiest aan de lineup toe te voegen maakt deze site gebruik van de <a href="https://github.com/kartik-v/bootstrap-fileinput">Bootstrap-Fileinput Plugin</a>.</li>
         <li>De hover effecten op de lineup carousel op de index pagina zijn verwezenlijkt dankzij <a href="http://miketricking.github.io/dist/">Image Hover Effects</a> van Mike Young</li>
+        <li>Firefox en sommige andere browsers ondersteunen de input type <code>datetime-local</code> niet dus maakt deze site gebruik van <a href="https://eonasdan.github.io/bootstrap-datetimepicker/">Bootstrap 3 Datepicker</a> </li>
     </ul>
 </div>

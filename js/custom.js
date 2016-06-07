@@ -10,3 +10,6 @@ $("#inputDay").change(function () {
     $("#inputAmount").prop('max', maxAvailable);
     $("#inputAmount").prop('value', 1);
 });
+
+$('#dateTimePicker').datetimepicker({
+});

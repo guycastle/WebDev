@@ -6,8 +6,10 @@
  * Time: 19:28
  */
 include "php/PageBuilder.php";
+include "php/PaymentEngine.php";
 $pBuilder = new PageBuilder();
 $storage = new Storage();
+$paymentEngine = new PaymentEngine();
 $user = null;
 $reservedTickets = null;
 $availableTickets = $storage->getAvailableTickets();
@@ -24,14 +26,14 @@ if (isset($_SESSION["loggedIn"]) &&
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $pBuilder->addHead("Tickets Bestellen");
     $pBuilder->addNavBar("tickets");
-    $pBuilder->addTicketsForm($user, $reservedTickets, $availableTickets, $priceList);
+    $pBuilder->addTicketsForm($user, $reservedTickets, $availableTickets, $priceList, $paymentEngine->getPaymentOptions());
     $pBuilder->addFooter();
 }
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["addToBasket"]) && $_POST["addToBasket"] === "addToBasket") {
         $day = $_POST["day"];
         $amount = $_POST["amount"];
-        if (isset($day) && !empty($day) && isset($amount) && !empty($amount) && is_numeric($amount) && $amount <= $storage->getAvailableTicketsByDay($day)) {
+        if (isset($day) && !empty($day) && isset($amount) && is_numeric($amount) && $amount <= $storage->getAvailableTicketsByDay($day)) {
 
             if (!isset($_SESSION["basket"])) {
                 $basket = array();
@@ -49,5 +51,38 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION["basket"][$_POST["deleteFromBasket"]]);
         }
         header("Location:/tickets.php");
+    }
+    elseif (isset($_POST["payForBasket"]) && $_POST["payForBasket"] === "payForBasket") {
+        if (isset($_POST["paymentOption"]) && !empty($_POST["paymentOption"])) {
+            if (isset($_SESSION["basket"]) && ! empty($_SESSION["basket"])) {
+                $basket = $_SESSION["basket"];
+                //calculate total serverside
+                $total = 0;
+                foreach ($basket as $day => $amount) {
+                    $total += $priceList[$day] * $amount;
+                }
+                if ($total > 0) {
+                    if ($transactionId = $paymentEngine->executePayment($_POST["paymentOption"], $total)) {
+                        $reservationSuccess = true;
+                        foreach ($basket as $day => $amount) {
+                            if ($reservationSuccess == true && $amount <= $storage->getAvailableTicketsByDay($day)) {
+                                $reservationSuccess = $storage->createOrUpdateReservation($user->id, $day, $amount);
+                            }
+                            else {
+                                $reservationSuccess = false;
+                            }
+                        }
+                        if ($reservationSuccess == true) {
+                            unset($_SESSION["basket"]);
+                            header("Location:/payment.php");
+                        }
+                        else {
+                            $paymentEngine->refund($transactionId);
+                            $pBuilder->buildErrorPage("Uw bestelling kon niet correct uitgevoerd worden, en uw transactie met referentie " . $transactionId . " werd ongedaan gemaakt");
+                        }
+                    }
+                }
+            }
+        }
     }
 }

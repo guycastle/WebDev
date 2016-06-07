@@ -16,7 +16,7 @@
         </div>
         <div class="btn-group">
             <button type="submit" class="btn btn-grey" id='loginButton'>Log in</button>
-            <a href='register.php' class='btn btn-grey'>Registreer</a>
+            <a href='/register.php' class='btn btn-grey'>Registreer</a>
         </div>
     </form>
 </div>

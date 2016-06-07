@@ -10,9 +10,11 @@ class Storage
 {
     private $mysqli;
 
+    private $orderedDays = array("Maandag" => 0, "Dinsdag" => 1, "Woensdag" => 2, "Donderdag" => 3, "Vrijdag" => 4, "Zaterdag" => 5, "Zondag" => 6);
+
     public function __construct()
     {
-        $this->mysqli = new mysqli("localhost", "owner", "owner", "festival");
+        $this->mysqli = new mysqli("dt5.ehb.be", "AWD026", "13685479", "AWD026");
         if ($this->mysqli->connect_error) {
             die();
         }
@@ -51,15 +53,7 @@ class Storage
 
     public function getLineupSortedByDay()
     {
-        $returnValue = array();
-        $temp = $this->getOrderedLineup();
-        foreach ($temp as $show) {
-            if (!isset($returnValue[$show->day])) {
-                $returnValue[$show->day] = array();
-            }
-            array_push($returnValue[$show->day], $show);
-        }
-        return $returnValue;
+        return $this->sortLineupByDay($this->getOrderedLineup());
     }
 
     //Returns a multidimensional associative array with the day as key, an array of shows corresponding to that day
@@ -240,9 +234,9 @@ class Storage
         }
     }
     
-    public function getPicture($pictureID) {
+    public function getPicture($pictureId) {
         $stmt = $this->mysqli->prepare("SELECT * FROM pictures WHERE id = ?");
-        $stmt->bind_param("d", $pictureID);
+        $stmt->bind_param("d", $pictureId);
         $stmt->execute();
         if ($temp = $stmt->get_result()) {
             if ($temp->num_rows > 0) {
@@ -252,14 +246,148 @@ class Storage
     }
 
     public function deleteShow($showId) {
-        $stmt = $this->mysqli->prepare("DELETE FROM shows WHERE id = ?");
-        $stmt->bind_param("d", $pictureID);
+        $stmt = $this->mysqli->prepare("DELETE pictures, shows FROM shows LEFT JOIN pictures ON shows.id = pictures.show_id WHERE shows.id = ?");
+        $stmt->bind_param("d", $showId);
+        return $stmt->execute();
+    }
+    
+    public function deleteNewsItem($newsItemId) {
+        $stmt = $this->mysqli->prepare("DELETE news_items, comments FROM news_items LEFT JOIN comments ON comments.news_item_id = news_items.id WHERE news_items.id = ?");
+        $stmt->bind_param("d", $newsItemId);
+        return $stmt->execute();
+    }
+    
+    public function deleteComment($commentId) {
+        $stmt = $this->mysqli->prepare("DELETE FROM comments WHERE id = ?");
+        $stmt->bind_param("d", $commentId);
+        return $stmt->execute();
+    }
+
+    public function getReservations($userID) {
+        $returnValue = array();
+        $stmt = $this->mysqli->prepare("SELECT * FROM reservations WHERE user_id = ?");
+        $stmt->bind_param("d", $userID);
         $stmt->execute();
-        if ($stmt->affected_rows == 1) {
-            return true;
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                while ($reservation = $temp->fetch_object()) {
+                    array_push($returnValue, $reservation);
+                }
+            }
         }
-        else {
-            return false;
+        return $this->sortArrayByDay($returnValue);
+    }
+
+    public function getAvailableTickets() {
+        $returnValue = array();
+        if ($temp = $this->mysqli->query("SELECT * FROM tickets")) {
+            if ($temp->num_rows > 0) {
+                while ($show = $temp->fetch_object()) {
+                    array_push($returnValue, $show);
+                }
+            }
+        }
+        return $this->sortArrayByDay($returnValue);
+    }
+
+    private function sortLineupByDay($array) {
+        $returnValue = array();
+        foreach ($array as $show) {
+            if (!isset($returnValue[$this->orderedDays[$show->day]])) {
+                $returnValue[$this->orderedDays[$show->day]] = array();
+            }
+            array_push($returnValue[$this->orderedDays[$show->day]], $show);
+        }
+        ksort($returnValue);
+        return $returnValue;
+    }
+
+    private function sortArrayByDay($array) {
+        $returnValue = array();
+        foreach ($array as $iDay) {
+            $returnValue[$this->orderedDays[$iDay->day]] = $iDay;
+        }
+        ksort($returnValue);
+        return $returnValue;
+    }
+
+    public function getAvailableTicketsByDay($day) {
+        $stmt = $this->mysqli->prepare("SELECT * FROM tickets WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        $stmt->execute();
+        if ($temp = $stmt->get_result()) {
+            if ($temp->num_rows > 0) {
+                return $temp->fetch_object();
+            }
+        }
+    }
+    
+    public function createAvailableTickets($day) {
+        $stmt = $this->mysqli->prepare("INSERT INTO tickets (day) VALUE (?)");
+        $stmt->bind_param("s", $day);
+        return $stmt->execute();
+    }
+
+    public function getPricelist() {
+        $returnValue = array();
+        if ($temp = $this->mysqli->query("SELECT day, price FROM tickets")) {
+            if ($temp->num_rows > 0) {
+                while ($ticket = $temp->fetch_object()) {
+                    $returnValue[$ticket->day] = $ticket->price;
+                }
+            }
+        }
+        return $returnValue;
+    }
+    
+    public function getShowCountByDay($day) {
+        $stmt = $this->mysqli->prepare("SELECT id FROM shows WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows;
+    }
+
+    public function getReservationCountByDay($day) {
+        $stmt = $this->mysqli->prepare("SELECT day FROM reservations WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows;
+    }
+    
+    public function deleteTickets($day) {
+        $stmt = $this->mysqli->prepare("DELETE FROM tickets WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        return $stmt->execute();
+    }
+
+    public function createOrUpdateReservation($userId, $day, $amount) {
+        $returnValue = false;
+        try {
+            echo "pipi";
+            $this->mysqli->autocommit(false);
+            $stmt = $this->mysqli->prepare("UPDATE tickets SET available_tickets = available_tickets - ? WHERE day = ? AND available_tickets - ? >= 0");
+            $stmt->bind_param("dsd", $amount, $day, $amount);
+            $stmt->execute();
+            if ($stmt->affected_rows > 0) {
+                $stmt = $this->mysqli->prepare("INSERT INTO reservations (day, user_id, amount) VALUES (?,?,?) ON DUPLICATE KEY UPDATE amount = amount + ?");
+                $stmt->bind_param("sddd", $day, $userId, $amount, $amount);
+                $stmt->execute();
+                $returnValue = $stmt->affected_rows > 0;
+            }
+            else {
+                $stmt = $this->mysqli->prepare("UPDATE tickets SET available_tickets = available_tickets + ? WHERE day = ?");
+                $stmt->bind_param("ds", $amount, $day);
+                $stmt->execute();
+            }
+            $this->mysqli->commit();
+        }
+        catch (\mysqli_sql_exception $ex) {
+            $this->mysqli->rollback();
+            throw $ex;
+        }
+        finally {
+            $this->mysqli->autocommit(true);
+            return $returnValue;
         }
     }
 }

@@ -15,7 +15,7 @@
             $fmtTime = strftime("%A, %d %B %Y om %H:%M", strtotime($newsitem->time));
             $commentURL = "comments.php?id=" . $newsitem->id;
             $linkText = empty($storage->getCommentsForNewsItem($newsitem->id)) ? "Reageer" : "Bekijk reacties";
-            echo "<div class='newsItem'><a class='unobtrusiveLink' href=''><h4>$newsitem->title</h4></a>\n
+            echo "<div class='newsItem'><a class='unobtrusiveLink' href='/comments.php?id=$newsitem->id'><h4>$newsitem->title</h4></a>\n
                 <div class='well well-lg newsWell'>\n
                 <p>$newsitem->content</p>\n
                 </div>\n

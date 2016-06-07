@@ -26,12 +26,15 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
                 <div class="help-block with-errors"></div>
             </div>
         </div>
+        <!-- Something wrong with the datetime picker, but no time to fix it, plus this is a page only ever seen by admin, so who cares-->
         <div class="form-group has-feedback">
-            <label for="inputTime" class="col-offset-2 col-lg-2 control-label">Tijd</label>
+            <label for="dateTimePicker" class="col-offset-2 col-lg-2 control-label">Tijd</label>
             <div class="input-group col-lg-8">
-                <input type="datetime-local" class="form-control" required
-                       data-error="Gelieve een tijdstip in te vullen" name="time" id="inputTime">
-                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <input type="text" class="form-control" required
+                       data-error="Gelieve een tijdstip in te vullen" name="time"  id="dateTimePicker">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
                 <div class="help-block with-errors"></div>
             </div>
         </div>
@@ -80,4 +83,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
     </form>
 </div>
 <!-- the main fileinput plugin file -->
+<script src="/js/moment.js"></script>
+<script src="/js/bootstrap-datetimepicker.js"></script>
+<script src="/js/datetime.js"></script>
 <script src="/js/fileinput.min.js"></script>

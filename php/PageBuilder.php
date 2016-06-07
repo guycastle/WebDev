@@ -19,7 +19,7 @@ class PageBuilder
         include ROOT_PATH . "views/partials/lineupCarousel.php";
     }
 
-    function addShowContent($show)
+    function addShowContent($show, $user)
     {
         include ROOT_PATH . "views/partials/showContent.php";
     }
@@ -72,7 +72,7 @@ class PageBuilder
         include ROOT_PATH . "views/partials/admin/newsForm.php";
     }
 
-    function addNewsComments($newsItem)
+    function addNewsComments($newsItem, $user)
     {
         include ROOT_PATH . "views/partials/newsComments.php";
     }
@@ -97,5 +97,13 @@ class PageBuilder
     
     function addAboutContent() {
         include ROOT_PATH . "views/partials/aboutContent.php";
+    }
+    
+    function addTicketsForm($user, $reservations, $availableTickets, $priceList, $paymentOptions) {
+        include ROOT_PATH . "views/partials/ticketsForm.php";
+    }
+    
+    function addSpinner() {
+        include ROOT_PATH . "/views/partials/spinner.php";
     }
 }

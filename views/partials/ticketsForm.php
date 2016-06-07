@@ -13,7 +13,8 @@
             <div class="well well-lg reservationWell">
                 <div class="row">
                     <div class="col-lg-6">
-                        <p>Dag <?php echo $user->name?>, zoals je hieronder kan zien heb je al een aantal tickets aangekocht
+                        <p>Dag <?php echo $user->name?>, hier kan je je reeds aangekochte tickets bezichtigen.
+                            Hieronder kan je zien hoeveel tickets er nog beschikbaar zijn indien je er nog wenst te bestellen
                         </p>
                     </div>
                     <div class="col-lg-6 well well-lg userWell">

@@ -74,10 +74,11 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         if ($reservationSuccess == true) {
                             unset($_SESSION["basket"]);
-                            //header("Location:/payment.php");
+                            header("Location:/payment.php");
                         }
                         else {
-                            $pBuilder->buildErrorPage("Uw bestelling kon niet correct uitgevoerd worden, neem contact op met een administrator");
+                            $paymentEngine->refund($transactionId);
+                            $pBuilder->buildErrorPage("Uw bestelling kon niet correct uitgevoerd worden, en uw transactie met referentie " . $transactionId . " werd ongedaan gemaakt");
                         }
                     }
                 }

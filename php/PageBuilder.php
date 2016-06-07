@@ -102,4 +102,8 @@ class PageBuilder
     function addTicketsForm($user, $reservations, $availableTickets, $priceList, $paymentOptions) {
         include ROOT_PATH . "views/partials/ticketsForm.php";
     }
+    
+    function addSpinner() {
+        include ROOT_PATH . "/views/partials/spinner.php";
+    }
 }

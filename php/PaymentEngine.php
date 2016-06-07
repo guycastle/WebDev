@@ -27,6 +27,11 @@ class PaymentEngine
             return $this->GUIDv4();
         }
     }
+    
+    public function refund($transactionId) {
+        //TODO - Insert refund functionality here
+        return true;
+    }
     /**
      * Returns a GUIDv4 string
      *

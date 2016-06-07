@@ -339,4 +339,24 @@ class Storage
         }
         return $returnValue;
     }
+    
+    public function getShowCountByDay($day) {
+        $stmt = $this->mysqli->prepare("SELECT id FROM shows WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows;
+    }
+
+    public function getReservationCountByDay($day) {
+        $stmt = $this->mysqli->prepare("SELECT id FROM reservations WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows;
+    }
+    
+    public function deleteTickets($day) {
+        $stmt = $this->mysqli->prepare("DELETE FROM tickets WHERE day = ?");
+        $stmt->bind_param("s", $day);
+        return $stmt->execute();
+    }
 }

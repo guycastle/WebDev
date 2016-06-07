@@ -13,8 +13,8 @@
             <div class="well well-lg reservationWell">
                 <div class="row">
                     <div class="col-lg-6">
-                        <p>Dag <?php echo $user->name?>, dit zijn de tickets die je reeds besteld hebt.
-                            Moest je nog bijkomende tickets wensen, bestel er gerust via onderstaande formulier</p>
+                        <p>Dag <?php echo $user->name?>, zoals je hieronder kan zien heb je al een aantal tickets aangekocht
+                        </p>
                     </div>
                     <div class="col-lg-6 well well-lg userWell">
                         <table class="table table-responsive">

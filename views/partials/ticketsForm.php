@@ -91,7 +91,7 @@
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                     <div class="form-group has-feedback">
                         <label for="inputDay" class="col-offset-2 col-lg-2 control-label">Dag</label>
-                        <div class="input-group col-lg-8">
+                        <div class="input-group col-lg-8 width-addon">
                             <select required data-error="Gelieve een dag te kiezen" name="day" id="inputDay"
                                     class="form-control">
                                 <option value="" disabled selected>Kies een dag</option>

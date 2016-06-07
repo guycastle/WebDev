@@ -7,6 +7,13 @@
  */
 include "php/PageBuilder.php";
 include "php/PaymentEngine.php";
+include_once "php/PHPMailerAutoload.php";
+define("SMTP_SERVER", "smtp.gmail.com");
+define("SMTP_PORT", 587);
+define("SMTP_SECURE", "tls");
+define("SMTP_USERNAME", "ehbprojectsmailer");
+//TODO - Put the password back in place after pushing to repo
+define("SMTP_PASSWORD", "YlyDVN8xnwBUUBzp2gYJ");
 $pBuilder = new PageBuilder();
 $storage = new Storage();
 $paymentEngine = new PaymentEngine();
@@ -73,6 +80,22 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             }
                         }
                         if ($reservationSuccess == true) {
+                            $mailer = new PHPMailer();
+                            $mailer->isSMTP();
+                            $mailer->Host = SMTP_SERVER;
+                            $mailer->Port = SMTP_PORT;
+                            $mailer->SMTPSecure = SMTP_SECURE;
+                            $mailer->SMTPAuth = true;
+                            $mailer->Username = SMTP_USERNAME;
+                            $mailer->Password = SMTP_PASSWORD;
+
+                            $message = "Dag " . $user->name . ",<br />\n<br />Je hebt deze mail ontvangen om te bevestigen dat jouw aankoop goed gelukt is.<br />\n<br />De details van jouw bestelling kan je terugvinden op de festivalsite onder \"Ticket\".<br />\n<br />We kijken alleszins uit naar jouw aanwezigheid op het festival.<br />\n<br />Tot binnenkort!";
+
+                            $mailer->addAddress($user->email);
+                            $mailer->Subject = "Aankoopsbevestiging tickets IndieGent Festival";
+                            $mailer->setFrom('noreply@indiegent.be', "IndieGent");
+                            $mailer->msgHTML($message);
+                            $mailer->Send();
                             unset($_SESSION["basket"]);
                             header("Location:/payment.php");
                         }

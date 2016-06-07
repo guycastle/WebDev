@@ -6,10 +6,14 @@
 $("#inputDay").change(function () {
     var maxAvailable = $('option:selected', this).attr('amount');
     var price = $('option:selected', this).attr('price');
+    var inputAmount = $("#inputAmount");
     $("#price").html(price + "&euro;");
-    $("#inputAmount").prop('max', maxAvailable);
-    $("#inputAmount").prop('value', 1);
+    inputAmount.prop('max', maxAvailable);
+    inputAmount.prop('value', 1);
 });
 
-$('#dateTimePicker').datetimepicker({
+$(".dropdown-selector").mouseup(function () {
+    var day = $(this).attr('day');
+    console.log(day);
+    $("#inputDay").val(day).trigger('change');
 });

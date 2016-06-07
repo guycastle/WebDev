@@ -26,6 +26,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
                 <div class="help-block with-errors"></div>
             </div>
         </div>
+        <!-- Something wrong with the datetime picker, but no time to fix it, plus this is a page only ever seen by admin, so who cares-->
         <div class="form-group has-feedback">
             <label for="dateTimePicker" class="col-offset-2 col-lg-2 control-label">Tijd</label>
             <div class="input-group col-lg-8">
@@ -84,5 +85,5 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
 <!-- the main fileinput plugin file -->
 <script src="/js/moment.js"></script>
 <script src="/js/bootstrap-datetimepicker.js"></script>
-<script src="/js/custom.js"></script>
+<script src="/js/datetime.js"></script>
 <script src="/js/fileinput.min.js"></script>

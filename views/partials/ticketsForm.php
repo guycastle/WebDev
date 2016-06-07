@@ -67,7 +67,7 @@
                     elseif ($avTckt >= 0) {
                         $buttonColor = "btn-danger";
                     }
-                    echo "<a href='#order' class='btn $buttonColor'>$dayTickets->day<br>
+                    echo "<a href='#order' class='btn $buttonColor dropdown-selector' day='$dayTickets->day'>$dayTickets->day<br>
                         <span class='badge $buttonColor'>$avTckt beschikbaar</span>\n
                     </a>\n";
                 }

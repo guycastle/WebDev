@@ -201,4 +201,4 @@
         </div>
     </div>
 </div>
-<script src="<?php echo PROJECT_HOME;?>d/js/custom.js">
+<script src="<?php echo PROJECT_HOME;?>js/custom.js">

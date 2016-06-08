@@ -374,9 +374,7 @@ class Storage
                 $returnValue = $stmt->affected_rows > 0;
             }
             else {
-                $stmt = $this->mysqli->prepare("UPDATE tickets SET available_tickets = available_tickets + ? WHERE day = ?");
-                $stmt->bind_param("ds", $amount, $day);
-                $stmt->execute();
+                throw new mysqli_sql_exception();
             }
             $this->mysqli->commit();
         }

@@ -41,16 +41,20 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $day = $_POST["day"];
         $amount = $_POST["amount"];
         if (isset($day) && !empty($day) && isset($amount) && is_numeric($amount) && $amount <= $storage->getAvailableTicketsByDay($day)) {
-
-            if (!isset($_SESSION["basket"])) {
-                $basket = array();
+            if ($amount >= $storage->getAvailableTicketsByDay($day)->available_tickets) {
+                header("Location:" . PROJECT_HOME . "tickets.php");
             }
             else {
-                $basket = $_SESSION["basket"];
+                if (!isset($_SESSION["basket"])) {
+                    $basket = array();
+                }
+                else {
+                    $basket = $_SESSION["basket"];
+                }
+                $basket[$day] = isset($basket[$day]) ? $basket[$day] += $amount : $amount;
+                $_SESSION["basket"] = $basket;
+                header("Location:" . PROJECT_HOME . "tickets.php");
             }
-            $basket[$day] = isset($basket[$day]) ? $basket[$day] += $amount : $amount;
-            $_SESSION["basket"] = $basket;
-            header("Location:" . PROJECT_HOME . "tickets.php");
         }
     }
     elseif (isset($_POST["deleteFromBasket"]) && !empty($_POST["deleteFromBasket"])) {
@@ -72,7 +76,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($transactionId = $paymentEngine->executePayment($_POST["paymentOption"], $total)) {
                         $reservationSuccess = true;
                         foreach ($basket as $day => $amount) {
-                            if ($reservationSuccess == true && $amount <= $storage->getAvailableTicketsByDay($day)) {
+                            if ($reservationSuccess == true && $amount <= $storage->getAvailableTicketsByDay($day)->available_tickets) {
                                 $reservationSuccess = $storage->createOrUpdateReservation($user->id, $day, $amount);
                             }
                             else {

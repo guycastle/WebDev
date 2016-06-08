@@ -6,6 +6,7 @@
  * Time: 01:49
  */
 include "php/PageBuilder.php";
+
 $pBuilder = new PageBuilder();
 $storage = new Storage();
 $user = null;
@@ -54,7 +55,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     foreach ($pictures as $picture) {
                         unlink(ROOT_PATH . "img/" . $picture->id . "." . $picture->extension);
                     }
-                    header("Location:/");
+                    header("Location:" . PROJECT_HOME);
                 }
             }    
         }

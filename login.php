@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["logout"]) && $_POST["logout"] == "logout") {
         session_unset();
         session_destroy();
-        header("Location:/");
+        header("Location:" . PROJECT_HOME);
     } else {
         $storage = new Storage();
         if (isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION["name"] = $user->name;
                     $_SESSION["userId"] = $user->id;
                     $_SESSION["surname"] = $user->surname;
-                    header("Location:/");
+                    header("Location:" . PROJECT_HOME);
                 } else {
                     $pBuilder->buildErrorPage("E-mail en paswoord komen niet overeen");
                 }

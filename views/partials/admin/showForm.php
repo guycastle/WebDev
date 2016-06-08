@@ -3,9 +3,8 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
 ?>
 <br>
 <div class="container">
-    <!-- remove special chars from PHP_SELF in order to avoid XSS-->
     <form class="form-horizontal" data-toggle="validator" id="show-form" method="post"
-          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+          action="<?php echo PROJECT_HOME; ?>admin/lineup.php" enctype="multipart/form-data">
         <div class="form-group has-feedback">
             <label for="inputArtist" class="col-offset-2 col-lg-2 control-label">Artist</label>
             <div class="input-group col-lg-8">
@@ -83,7 +82,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
     </form>
 </div>
 <!-- the main fileinput plugin file -->
-<script src="/js/moment.js"></script>
-<script src="/js/bootstrap-datetimepicker.js"></script>
-<script src="/js/datetime.js"></script>
-<script src="/js/fileinput.min.js"></script>
+<script src="<?php echo PROJECT_HOME; ?>js/moment.js"></script>
+<script src="<?php echo PROJECT_HOME; ?>js/bootstrap-datetimepicker.js"></script>
+<script src="<?php echo PROJECT_HOME; ?>js/datetime.js"></script>
+<script src="<?php echo PROJECT_HOME; ?>js/fileinput.min.js"></script>

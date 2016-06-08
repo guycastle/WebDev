@@ -9,12 +9,13 @@ $storage = new Storage();
 $comments = $storage->getCommentsForNewsItem($newsItem->id);
 $fmtTime = strftime("%A, %d %B %Y om %H:%M", strtotime($newsItem->time));
 $loggedIn = isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == true;
+$loginURL = PROJECT_HOME . "login.php";
 $linkText = $loggedIn ?
     /*Logged in*/
     isset($comments) && empty($comments) ? "" : "<a href='#react' class='unobtrusiveLink col-lg-6 text-right'><h4>Reageer</h4></a>\n"
     :
     /*Not Logged in*/
-    "<div class='col-lg-6 text-right'><a href='/login.php' class='btn btn-grey'>Registreer of log in om te reageren</a></div>\n";
+    "<div class='col-lg-6 text-right'><a href='$loginURL' class='btn btn-grey'>Registreer of log in om te reageren</a></div>\n";
 ?>
 <br>
 <div class="container">
@@ -29,7 +30,7 @@ $linkText = $loggedIn ?
         <?php
         if (isset($user) && $user->admin == true) {
             ?>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <form method="post" action="<?php echo PROJECT_HOME;?>comments.php">
                     <input name="deleteNewsId" hidden value="<?php echo $newsItem->id ?>">
                     <button type="submit" name="deleteNews" value="deleteNews" class="btn btn-danger btn-lg text-justify p-l-1">Nieuwsitem met comments verwijderen</button>
                 </form>
@@ -58,7 +59,7 @@ $linkText = $loggedIn ?
                     ?>
                     <div class="row">
                         <div class="col-lg-offset-4">
-                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <form method="post" action="<?php echo PROJECT_HOME;?>comments.php">
                                 <input name="deleteCommentId" hidden value="<?php echo $comment->id ?>">
                                 <button type="submit" name="deleteComment" value="<?php echo $comment->news_item_id?>" class="btn btn-danger btn-xs text-justify p-l-1">Verwijder commentaar</button>
                             </form>
@@ -77,7 +78,7 @@ $linkText = $loggedIn ?
             <div class="row">
                 <a name="react"></a>
                 <form data-toggle="validator" id="comment-form" method="post"
-                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                      action="<?php echo PROJECT_HOME;?>comments.php">
                     <div class="form-group has-feedback">
                         <div class='col-lg-offset-2 col-lg-2'>
                             <label for="inputContent" class="control-label">Plaats een reactie</label>

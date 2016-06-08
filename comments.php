@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($user)) {
         if ($user->admin == true && isset($_POST["deleteNews"]) && !empty($_POST["deleteNews"]) && isset($_POST["deleteNewsId"]) && !empty($_POST["deleteNewsId"])) {
             $storage->deleteNewsItem($_POST["deleteNewsId"]);
-            header("Location:/");
+            header("Location:" . PROJECT_HOME);
         }
         elseif ($user->admin == true && isset($_POST["deleteComment"]) && !empty($_POST["deleteComment"]) && isset($_POST["deleteCommentId"]) && !empty($_POST["deleteCommentId"])) {
             $storage->deleteComment($_POST["deleteCommentId"]);
-            header("Location:" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . "?id=" . $_POST["deleteComment"]);
+            header("Location:" . PROJECT_HOME . "comments?id=" . $_POST["deleteComment"]);
         }
         else {
             $commentContent = nl2br(htmlspecialchars($_POST["content"]));
@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($temp)) {
                     $storage->createComment($user->id, $newsItemId, $commentContent);
                 }
-                header("Location:/comments.php?id=" . $newsItemId);
+                header("Location:" . PROJECT_HOME . "comments.php?id=" . $newsItemId);
             }
         }
     } else {
-        header("Location:/login.php");
+        header("Location:" . PROJECT_HOME . "login.php");
     }
 }
 else {

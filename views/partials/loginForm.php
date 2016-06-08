@@ -1,6 +1,6 @@
 <br>
 <div class="container">
-    <form action="/login.php" method="post" data-toggle="validator" id="login-form">
+    <form action="<?php echo PROJECT_HOME;?>login.php" method="post" data-toggle="validator" id="login-form">
         <div class="form-group has-feedback">
             <div class='input-group'>
                 <input name="email" type="email" placeholder="Email" class="form-control" id='loginEmail' required>
@@ -16,7 +16,7 @@
         </div>
         <div class="btn-group">
             <button type="submit" class="btn btn-grey" id='loginButton'>Log in</button>
-            <a href='/register.php' class='btn btn-grey'>Registreer</a>
+            <a href='<?php echo PROJECT_HOME;?>register.php' class='btn btn-grey'>Registreer</a>
         </div>
     </form>
 </div>

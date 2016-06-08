@@ -61,7 +61,7 @@ $spotify = $show->spotify_uri;
     <?php
         if (isset($user) && $user->admin == true) {
     ?>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form method="post" action="<?php echo PROJECT_HOME;?>artists.php">
             <input name="showId" hidden value="<?php echo $show->id ?>">
             <button type="submit" class="btn btn-danger btn-lg">Artiest en foto's verwijderen</button>
         </form>

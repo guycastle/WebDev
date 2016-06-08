@@ -1,7 +1,7 @@
 <br>
 <div class="container">
     <form class="form-horizontal" data-toggle="validator" id="newspost-form" method="post"
-          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          action="<?php echo PROJECT_HOME; ?>admin/news.php">
         <div class="form-group has-feedback">
             <label for="inputTitle" class="col-offset-2 col-lg-2 control-label">Titel</label>
             <div class="input-group col-lg-8">

@@ -50,14 +50,14 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $basket[$day] = isset($basket[$day]) ? $basket[$day] += $amount : $amount;
             $_SESSION["basket"] = $basket;
-            header("Location:/tickets.php");
+            header("Location:" . PROJECT_HOME . "tickets.php");
         }
     }
     elseif (isset($_POST["deleteFromBasket"]) && !empty($_POST["deleteFromBasket"])) {
         if (isset($_SESSION["basket"]) && !empty($_SESSION["basket"])) {
             unset($_SESSION["basket"][$_POST["deleteFromBasket"]]);
         }
-        header("Location:/tickets.php");
+        header("Location:". PROJECT_HOME . "tickets.php");
     }
     elseif (isset($_POST["payForBasket"]) && $_POST["payForBasket"] === "payForBasket") {
         if (isset($_POST["paymentOption"]) && !empty($_POST["paymentOption"])) {
@@ -97,7 +97,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->msgHTML($message);
                             $mailer->Send();
                             unset($_SESSION["basket"]);
-                            header("Location:/payment.php");
+                            header("Location:" . PROJECT_HOME . "payment.php");
                         }
                         else {
                             $paymentEngine->refund($transactionId);

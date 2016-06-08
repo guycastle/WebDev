@@ -9,7 +9,7 @@ include "../php/PageBuilder.php";
 $pBuilder = new PageBuilder();
 $storage = new Storage();
 if (!isset($_SESSION["userId"]) && !isset($_SESSION["email"])) {
-    header("Location:/");
+    header("Location:" . PROJECT_HOME);
 }
 else {
     $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);
@@ -19,7 +19,7 @@ else {
             $newsContent = nl2br(htmlspecialchars($_POST["content"]));
             $newsItem = $storage->createNewsItem($newsTitle, $newsContent);
             if (isset($newsItem) && !empty($newsItem)) {
-                header("Location:/comments.php?id=" . $newsItem->id);
+                header("Location:" . PROJECT_HOME . "comments.php?id=" . $newsItem->id);
             }
         }
         $pBuilder->addHead("Admin");
@@ -28,6 +28,6 @@ else {
         $pBuilder->addFooter();
     }
     else {
-        header("Location:/");
+        header("Location:" . PROJECT_HOME);
     }
 }

@@ -55,7 +55,7 @@ $pattern = '^<iframe src="https:\/\/embed\.spotify\.com\/\?uri=spotify%3Aartist%
             </div>
         </div>
         <div class="form-group has-feedback">
-            <label for="inputSpotify" class="col-offset-2 col-lg-2 control-label">Spotify Embed Code</label>
+            <label for="inputSpotify" class="col-offset-2 col-lg-2 control-label">Spotify URI</label>
             <div class="input-group col-lg-8">
                 <input type="text" class="form-control" name="spotify" id="inputSpotify" placeholder="Spotify Embed Code"
                        pattern='<?php echo SPOTIFY_PATTERN ?>' <?php echo isset($_POST["spotify"]) ? "value=\"" . htmlspecialchars($_POST["spotify"]) . "\"" : "" ?>

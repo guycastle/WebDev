@@ -7,7 +7,7 @@
  */
 include "php/PageBuilder.php";
 $pBuilder = new PageBuilder();
-header("refresh:5; URL=" . PROJECT_HOME . "/tickets.php");
+header("refresh:5; URL=" . PROJECT_HOME . "tickets.php");
 $pBuilder->addHead("Betaling");
 $pBuilder->addNavBar(null);
 $pBuilder->addError("U wordt nu doorverwezen naar uw betalingsinstelling. Bij het succesvol uitvoeren van de betaling wordt u teruggebracht naar een overzicht van uw reservaties.");

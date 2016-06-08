@@ -363,7 +363,6 @@ class Storage
     public function createOrUpdateReservation($userId, $day, $amount) {
         $returnValue = false;
         try {
-            echo "pipi";
             $this->mysqli->autocommit(false);
             $stmt = $this->mysqli->prepare("UPDATE tickets SET available_tickets = available_tickets - ? WHERE day = ? AND available_tickets - ? >= 0");
             $stmt->bind_param("dsd", $amount, $day, $amount);

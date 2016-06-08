@@ -35,7 +35,7 @@ if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["email"]) 
             $_SESSION["name"] = $user->name;
             $_SESSION["userId"] = $user->id;
             $_SESSION["surname"] = $user->surname;
-            header("Location:/");
+            header("Location:" . PROJECT_HOME);
         }
     }
 }

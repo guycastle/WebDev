@@ -50,14 +50,14 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $basket[$day] = isset($basket[$day]) ? $basket[$day] += $amount : $amount;
             $_SESSION["basket"] = $basket;
-            header("Location:/tickets.php");
+            header("Location:" . PROJECT_HOME . "tickets.php");
         }
     }
     elseif (isset($_POST["deleteFromBasket"]) && !empty($_POST["deleteFromBasket"])) {
         if (isset($_SESSION["basket"]) && !empty($_SESSION["basket"])) {
             unset($_SESSION["basket"][$_POST["deleteFromBasket"]]);
         }
-        header("Location:/tickets.php");
+        header("Location:". PROJECT_HOME . "tickets.php");
     }
     elseif (isset($_POST["payForBasket"]) && $_POST["payForBasket"] === "payForBasket") {
         if (isset($_POST["paymentOption"]) && !empty($_POST["paymentOption"])) {
@@ -89,7 +89,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->Username = SMTP_USERNAME;
                             $mailer->Password = SMTP_PASSWORD;
 
-                            $message = "Dag " . $user->name . ",<br />\n<br />Je hebt deze mail ontvangen om te bevestigen dat jouw aankoop goed gelukt is.<br />\n<br />De details van jouw bestelling kan je terugvinden op de festivalsite onder \"Ticket\".<br />\n<br />We kijken alleszins uit naar jouw aanwezigheid op het festival.<br />\n<br />Tot binnenkort!";
+                            $message = "Dag " . $user->name . ",<br />\n<br />Je hebt deze mail ontvangen om te bevestigen dat jouw aankoop goed gelukt is.<br />\n<br />De details van jouw bestelling kan je terugvinden op de festivalsite onder \"Tickets\".<br />\n<br />We kijken alleszins uit naar jouw aanwezigheid op het festival.<br />\n<br />Tot binnenkort!";
 
                             $mailer->addAddress($user->email);
                             $mailer->Subject = "Aankoopsbevestiging tickets IndieGent Festival";
@@ -97,7 +97,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->msgHTML($message);
                             $mailer->Send();
                             unset($_SESSION["basket"]);
-                            header("Location:/payment.php");
+                            header("Location:" . PROJECT_HOME . "payment.php");
                         }
                         else {
                             $paymentEngine->refund($transactionId);

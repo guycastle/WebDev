@@ -61,7 +61,7 @@ $spotify = $show->spotify_uri;
     <?php
         if (isset($user) && $user->admin == true) {
     ?>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form method="post" action="<?php echo PROJECT_HOME;?>artists.php">
             <input name="showId" hidden value="<?php echo $show->id ?>">
             <button type="submit" class="btn btn-danger btn-lg">Artiest en foto's verwijderen</button>
         </form>
@@ -74,7 +74,7 @@ $spotify = $show->spotify_uri;
             //Convert the DB timestamp (which is a string apparently) to a time, in order to format that to a particular
             //string and the uppercase that first letter. Not using the day property of the show object, using the actual
             //day to prevent confusion. The day property is of import for ticketing purposes, not actual timetelling
-            
+
             $fmtTime = ucfirst(strftime("%A, %d %B om %Hu%M", strtotime($show->time)));
             echo "<h1>$fmtTime</h1>";
             echo "<h2>Over $show->artist</h2>\n

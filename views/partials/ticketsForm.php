@@ -80,16 +80,19 @@
     <div class="row">
         <?php
         if (!isset($user)) {
-            echo "<div class=\"col-lg-offset-1 col-lg-10 text-center\">";
-            echo "<h1>Om tickets te kopen dient u ingelogd te zijn</h1>";
-            echo "<a href='/login.php' class='btn btn-lg btn-grey'>Inloggen</a></div>";
+            ?>
+        <div class="col-lg-offset-1 col-lg-10 text-center">
+            <h1>Om tickets te kopen dient u ingelogd te zijn</h1>
+            <a href='<?php echo PROJECT_HOME;?>login.php' class='btn btn-lg btn-grey'>Inloggen</a>
+        </div>
+        <?php
         }
         else {
         ?>
         <div class='row'>
             <div class='col-lg-5'>
                 <form class="form-horizontal basket-form" data-toggle="validator" id="show-form" method="post"
-                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+                      action="<?php echo PROJECT_HOME;?>tickets.php" enctype="multipart/form-data">
                     <div class="form-group has-feedback">
                         <label for="inputDay" class="col-offset-2 col-lg-2 control-label">Dag</label>
                         <div class="input-group col-lg-8 width-addon">
@@ -146,25 +149,26 @@
                             $total = 0;
                             foreach($basket as $day => $amount) {
                                 $subTotal = $amount * $priceList[$day];
-                                $action = htmlspecialchars($_SERVER["PHP_SELF"]);
-                                echo "<tr class='text-left'>
-                                        <th>$day</th>
-                                        <td>$amount</td>
-                                        <td>$subTotal</td>
-                                        <td class='text-center'><form method='post' action='$action'><button id='basket-delete' name='deleteFromBasket' value='$day' class='btn-xs btn-link btn-danger'><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></button></form></td>
-                                    </tr>";
-                                $total += $subTotal;
-                            }
-                            echo "<tr>
-                                    <th colspan='2'>Totaal:</th>
-                                    <td class='text-left' colspan='2'>$total&euro;</td>
-                                </tr>";
+                        ?>
+                            <tr class='text-left'>
+                                <th><?php echo $day;?></th>
+                                <td><?php echo $amount;?></td>
+                                <td><?php echo $subTotal;?></td>
+                                <td class='text-center'><form method='post' action='<?php echo PROJECT_HOME;?>tickets.php'><button id='basket-delete' name='deleteFromBasket' value='<?php echo $day;?>' class='btn-xs btn-link btn-danger'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></form></td>
+                            </tr>
+                        <?php
+                            $total += $subTotal;
+                        }
+                        echo "<tr>
+                                <th colspan='2'>Totaal:</th>
+                                <td class='text-left' colspan='2'>$total&euro;</td>
+                            </tr>";
                         ?>
                         </tbody>
                     </table>
                     <div class="container">
                         <form class="form-horizontal" data-toggle="validator" id="payment-form" method="post"
-                              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                              action="<?php echo PROJECT_HOME;?>tickets.php">
                             <div class="form-group has-feedback">
                                 <label for="inputPaymentOption" class="col-offset-2 col-lg-2 control-label">Betaalmethode</label>
                                 <div class="input-group col-lg-8">
@@ -197,4 +201,4 @@
         </div>
     </div>
 </div>
-<script src="/js/custom.js">
+<script src="<?php echo PROJECT_HOME;?>d/js/custom.js">

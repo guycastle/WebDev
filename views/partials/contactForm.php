@@ -1,7 +1,7 @@
 <div class="container">
     <!-- remove special chars from PHP_SELF in order to avoid XSS-->
     <form class="form-horizontal" data-toggle="validator" id="contact-form" method="post"
-          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+          action="<?php echo PROJECT_HOME; ?>contact.php">
         <div class="form-group has-feedback">
             <label for="inputName" class="col-offset-2 col-lg-2 control-label">Naam</label>
             <div class="input-group col-lg-8">

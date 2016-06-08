@@ -11,7 +11,7 @@ define("IMAGE_ROOT", ROOT_PATH . "img/");
 $pBuilder = new PageBuilder();
 $storage = new Storage();
 if (!isset($_SESSION["userId"]) && !isset($_SESSION["email"])) {
-    header("Location:/");
+    header("Location:" . PROJECT_HOME);
 }
 else {
     $user = $storage->verifyUserIdAndEmail($_SESSION["userId"], $_SESSION["email"]);
@@ -54,7 +54,7 @@ else {
                     $storage->deleteShow($newShow->id);
                     $pBuilder->buildErrorPage("Er is een probleem opgetreden, probeer later opnieuw");
                 }
-                header("Location:/artists.php?id=$newShow->id");
+                header("Location:" . PROJECT_HOME . "artists.php?id=$newShow->id");
             }
         }
         else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -65,6 +65,6 @@ else {
         }
     }
     else {
-        header("Location:/");
+        header("Location:" . PROJECT_HOME);
     }
 }

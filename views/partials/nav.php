@@ -12,7 +12,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">IndieGent Festival</a>
+                        <a class="navbar-brand" href="<?php echo PROJECT_HOME;?>">IndieGent Festival</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -30,7 +30,9 @@
                                 foreach ($lineup as $dayNumber => $shows) {
                                     echo "<li class=\"dropdown-header\">$orderedDays[$dayNumber]</li>\n";
                                     foreach ($shows as $show) {
-                                        echo "<li><a href=\"/artists.php?id=$show->id\">$show->artist</a></li>\n";
+                                        ?>
+                                        <li><a href="<?php echo PROJECT_HOME;?>artists.php?id=<?php echo $show->id;?>"><?php echo $show->artist;?></a></li>
+                                    <?php 
                                     }
                                     if (sizeof($lineup) > 1 && end(array_keys($lineup)) != $dayNumber) {
                                         echo "<li role=\"separator\" class=\"divider\"></li>\n";
@@ -38,13 +40,13 @@
                                 }
                                 ?>
                             </ul>
-                            <li><a href="/about.php"<?php if ($currentPage == "about") {
+                            <li><a href="<?php echo PROJECT_HOME;?>about.php"<?php if ($currentPage == "about") {
                                     echo "class=\"active\"";
                                 } ?>>About</a></li>
-                            <li><a href="/contact.php" <?php if ($currentPage == "contact") {
+                            <li><a href="<?php echo PROJECT_HOME;?>contact.php" <?php if ($currentPage == "contact") {
                                     echo "class=\"active\"";
                                 } ?>>Contact</a></li>
-                            <li><a href="/tickets.php" id="navbar-tickets" <?php if ($currentPage == "tickets") {
+                            <li><a href="<?php echo PROJECT_HOME;?>tickets.php" id="navbar-tickets" <?php if ($currentPage == "tickets") {
                                     echo "class=\"active\"";
                                 } ?>>
                                     Tickets<?php
@@ -64,8 +66,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/admin/news.php">Nieuwsitem aanmaken</a></li>
-                                        <li><a href="/admin/lineup.php">Toevoegen aan lineup</a></li>
+                                        <li><a href="<?php echo PROJECT_HOME;?>admin/news.php">Nieuwsitem aanmaken</a></li>
+                                        <li><a href="<?php echo PROJECT_HOME;?>admin/lineup.php">Toevoegen aan lineup</a></li>
                                     </ul>
                                     <?php
                                 }
@@ -79,7 +81,7 @@
                             $name = $_SESSION["name"];
                         ?>
                         <div class="nav navbar-nav navbar-right">
-                            <form  action="/login.php" method="post" class="logout-form">
+                            <form  action="<?php echo PROJECT_HOME;?>login.php" method="post" class="logout-form">
                                 <button type="submit" name="logout" value="logout" class="btn-link navbar-btn-logout"><span class="glyphicon glyphicon-log-out navbar-text" aria-hidden="true"></span></button>
                             </form>
                         </div>
@@ -93,7 +95,7 @@
                                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                                 </a>
                                 <div class="dropdown-menu" style="padding:17px;">
-                                    <form id='login-form' action="/login.php" method="post" autocomplete="off" data-toggle="validator">
+                                    <form id='login-form' action="<?php echo PROJECT_HOME;?>login.php" method="post" autocomplete="off" data-toggle="validator">
                                         <div class="form-group has-feedback">
                                             <div class='input-group'>
                                                 <input name="email" type="email" placeholder="Email" class="form-control" id='loginEmail' required>
@@ -107,7 +109,7 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-grey" id='loginButton'>Log in</button>
-                                        <a href='register.php' class='btn btn-grey'>Registreer</a>
+                                        <a href='<?php echo PROJECT_HOME;?>register.php' class='btn btn-grey'>Registreer</a>
                         <?php }
                         }
                         ?>

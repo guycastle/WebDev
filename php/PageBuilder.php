@@ -5,7 +5,8 @@
  * Date: 20/05/2016
  * Time: 00:23
  */
-define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . "/");
+define("ROOT_PATH", dirname(__DIR__) . "/");
+define("PROJECT_HOME", "http://dtsl.ehb.be/~guillaume.vandecaste/WDA/werkstuk/");
 setlocale(LC_ALL, 'Belgian');
 include_once "Storage.php";
 include_once "Mobile_Detect.php";

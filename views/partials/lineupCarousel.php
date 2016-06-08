@@ -23,23 +23,26 @@
             }
             $picture = $storage->getSingleImageFor($show->id);
             if (isset($picture) && file_exists("img/$picture->id.$picture->extension")) {
+                $pHome = PROJECT_HOME;
                 $fmtTime = ucfirst(strftime("%A, %d %B om %Hu%M", strtotime($show->time)));
                 //Description can be overly long, so let's just explode it at the first break
                 $paragraph = explode("<br />", $show->description)[0];
-                echo "<div class=\"$class\">\n
+                ?>
+        <div class="<?php echo $class; ?>">
                 <div class='coverphoto hovereffect'>                       
-                    <img src=\"img/$picture->id.$picture->extension\" alt=\"$show->artist\">\n
-                    <a href='artists.php?id=$show->id' class='unobtrusiveLink'><div class='overlay container'>
-                    <h2>$fmtTime</h2>
-                    <h4 class='col-lg-6 col-lg-offset-3'>$paragraph</h4>
+                    <img src="<?php echo PROJECT_HOME . "img/" . $picture->id . "." . $picture->extension;?>" alt="<?php echo $show->artist;?>">
+                    <a href='<?php echo PROJECT_HOME . "artists.php?id=" . $show->id;?>' class='unobtrusiveLink'><div class='overlay container'>
+                    <h2><?php echo $fmtTime;?></h2>
+                    <h4 class='col-lg-6 col-lg-offset-3'><?php echo $paragraph;?></h4>
                     </div></a>
-                    <div class=\"container\">\n                     
-                        <div class=\"carousel-caption\">\n
-                            <h1>$show->artist</h1>\n
-                        </div>\n
-                    </div>\n
-                </div>\n    
-            </div>\n";
+                    <div class="container">                   
+                        <div class="carousel-caption">
+                            <h1><?php echo $show->artist;?></h1>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        <?php
             }
         }
         ?>

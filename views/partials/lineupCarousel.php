@@ -23,7 +23,7 @@
             }
             $picture = $storage->getSingleImageFor($show->id);
             if (isset($picture) && file_exists("img/$picture->id.$picture->extension")) {
-                $pHome = PROJECT_HOME; 
+                $pHome = PROJECT_HOME;
                 $fmtTime = ucfirst(strftime("%A, %d %B om %Hu%M", strtotime($show->time)));
                 //Description can be overly long, so let's just explode it at the first break
                 $paragraph = explode("<br />", $show->description)[0];

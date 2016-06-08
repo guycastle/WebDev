@@ -89,7 +89,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->Username = SMTP_USERNAME;
                             $mailer->Password = SMTP_PASSWORD;
 
-                            $message = "Dag " . $user->name . ",<br />\n<br />Je hebt deze mail ontvangen om te bevestigen dat jouw aankoop goed gelukt is.<br />\n<br />De details van jouw bestelling kan je terugvinden op de festivalsite onder \"Ticket\".<br />\n<br />We kijken alleszins uit naar jouw aanwezigheid op het festival.<br />\n<br />Tot binnenkort!";
+                            $message = "Dag " . $user->name . ",<br />\n<br />Je hebt deze mail ontvangen om te bevestigen dat jouw aankoop goed gelukt is.<br />\n<br />De details van jouw bestelling kan je terugvinden op de festivalsite onder \"Tickets\".<br />\n<br />We kijken alleszins uit naar jouw aanwezigheid op het festival.<br />\n<br />Tot binnenkort!";
 
                             $mailer->addAddress($user->email);
                             $mailer->Subject = "Aankoopsbevestiging tickets IndieGent Festival";

@@ -151,10 +151,10 @@
                                 $subTotal = $amount * $priceList[$day];
                         ?>
                             <tr class='text-left'>
-                                <th>$day</th>
-                                <td>$amount</td>
-                                <td>$subTotal</td>
-                                <td class='text-center'><form method='post' action='<?php echo PROJECT_HOME;?>tickets.php'><button id='basket-delete' name='deleteFromBasket' value='$day' class='btn-xs btn-link btn-danger'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></form></td>
+                                <th><?php echo $day;?></th>
+                                <td><?php echo $amount;?></td>
+                                <td><?php echo $subTotal;?></td>
+                                <td class='text-center'><form method='post' action='<?php echo PROJECT_HOME;?>tickets.php'><button id='basket-delete' name='deleteFromBasket' value='<?php echo $day;?>' class='btn-xs btn-link btn-danger'><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></form></td>
                             </tr>
                         <?php
                             $total += $subTotal;
@@ -201,4 +201,4 @@
         </div>
     </div>
 </div>
-<script src="<?php echo PROJECT_HOME;?>/js/custom.js">
+<script src="<?php echo PROJECT_HOME;?>d/js/custom.js">

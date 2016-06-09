@@ -13,6 +13,6 @@
         <li>Firefox en sommige andere browsers ondersteunen de input type <code>datetime-local</code> niet dus maakt deze site gebruik van <a href="https://eonasdan.github.io/bootstrap-datetimepicker/">Bootstrap 3 Datepicker</a> </li>
         <li>Om in de payment engine een unieke transactie id te creëren wordt gebruik gemaakt van code dat op <a href="http://php.net/manual/en/function.com-create-guid.php">PHP.net</a> gepost werd</li>
         <li>De draaiende loading spinner die gebruikt wordt bij het redirecten naar de betalingsinstelling is opgemaakt met de code van <a href="https://paulund.co.uk/css-loading-spinners">CSS Loading Spinners</a></li>
-        <li>De code is beschikbaar op een openbare repository op <a href="https://github.com/guycastle/WebDev.git">GitHug</a></li>
+        <li>De code is beschikbaar op een openbare repository op <a href="https://github.com/guycastle/WebDev.git">GitHub</a></li>
     </ul>
 </div>

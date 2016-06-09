@@ -14,7 +14,8 @@ class Storage
 
     public function __construct()
     {
-        $this->mysqli = new mysqli("dt5.ehb.be", "AWD026", "13685479", "AWD026");
+        //TODO - Fill in the DB blanks
+        $this->mysqli = new mysqli("dt5.ehb.be", "XXXXXXXX", "XXXXXXXX", "XXXXXXXXX");
         if ($this->mysqli->connect_error) {
             die();
         }

@@ -13,7 +13,7 @@ define("SMTP_PORT", 587);
 define("SMTP_SECURE", "tls");
 define("SMTP_USERNAME", "ehbprojectsmailer");
 //TODO - Put the password back in place after pushing to repo
-define("SMTP_PASSWORD", "YlyDVN8xnwBUUBzp2gYJ");
+define("SMTP_PASSWORD", "XXXXXXXXXXXXXXXXX");
 $pBuilder = new PageBuilder();
 $storage = new Storage();
 $paymentEngine = new PaymentEngine();
